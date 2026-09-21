@@ -1,0 +1,397 @@
+.page-careers {
+  min-height: 100vh;
+}
+
+.careers-hero-section {
+  padding: clamp(4rem, 7vw, 6.5rem) 0 clamp(3rem, 5vw, 4.5rem);
+  text-align: center;
+}
+
+.careers-hero-title {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+.careers-hero-sub {
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  max-width: 780px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* Culture Grid */
+.culture-card {
+  padding: 2.25rem 1.75rem;
+}
+
+.culture-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: rgba(0, 240, 255, 0.3);
+  margin-bottom: 0.75rem;
+}
+
+.culture-card-title {
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.culture-card-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Benefits Panel */
+.benefits-glass-panel {
+  padding: 2.5rem;
+  border-radius: var(--radius-xl);
+}
+
+.benefits-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.benefit-check {
+  color: #34D399;
+  flex-shrink: 0;
+}
+
+/* Openings List */
+.openings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.job-card {
+  padding: 2.25rem 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.job-card-main {
+  flex: 1;
+}
+
+.job-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.job-dept-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+}
+
+.job-type-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.job-salary-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.job-title {
+  font-size: 1.35rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.job-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.meta-icon {
+  color: var(--neon-cyan);
+}
+
+.job-overview {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.job-skills-tags {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.job-skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.job-card-action {
+  flex-shrink: 0;
+}
+
+/* Modal */
+.application-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.application-modal {
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #0B1120;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 2.5rem;
+  position: relative;
+  border-radius: var(--radius-xl);
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-modal-btn:hover {
+  color: #FFFFFF;
+}
+
+.modal-header {
+  margin-bottom: 1.5rem;
+}
+
+.modal-job-title {
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.modal-job-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.modal-job-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.modal-requirements {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.req-title {
+  font-size: 0.875rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.modal-requirements ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modal-requirements li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.req-check {
+  color: var(--neon-cyan);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.modal-application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-subhead {
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field label {
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-field input,
+.form-field textarea {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-subtle);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  outline: none;
+  min-height: 44px;
+}
+
+.form-field textarea {
+  min-height: 80px;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.modal-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.modal-success-screen {
+  padding: 2rem 1rem;
+}
+
+.success-icon-wrap {
+  margin-bottom: 1rem;
+}
+
+.modal-success-screen h3 {
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+}
+
+.modal-success-screen p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .job-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .job-card-action {
+    width: 100%;
+  }
+  .job-card-action a,
+  .job-card-action button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+}

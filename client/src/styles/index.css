@@ -1,0 +1,189 @@
+:root {
+  /* Core Color Palette - Cyber Dark & Vibrant Accents */
+  --bg-primary: #050814;
+  --bg-secondary: #0A1026;
+  --bg-tertiary: #0F172A;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --bg-card-hover: rgba(26, 38, 70, 0.85);
+  --bg-glass: rgba(10, 16, 38, 0.65);
+  
+  /* Light Balancing Surfaces for Section Contrast */
+  --bg-light: #F8FAFC;
+  --bg-light-card: #FFFFFF;
+  --text-light-heading: #0F172A;
+  --text-light-body: #475569;
+  --border-light: #E2E8F0;
+
+  /* Cyber & Tech Accents */
+  --cyber-blue: #0066FF;
+  --cyber-blue-hover: #1D4ED8;
+  --neon-cyan: #00F0FF;
+  --neon-cyan-glow: rgba(0, 240, 255, 0.35);
+  --cyber-purple: #8B5CF6;
+  --cyber-purple-glow: rgba(139, 92, 246, 0.3);
+  --cyber-emerald: #10B981;
+  --cyber-amber: #F59E0B;
+  --cyber-rose: #F43F5E;
+
+  /* Typography Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-accent: #38BDF8;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(56, 189, 248, 0.12);
+  --border-glow: rgba(0, 240, 255, 0.4);
+  --border-card: rgba(255, 255, 255, 0.08);
+
+  /* Gradients */
+  --gradient-cyber: linear-gradient(135deg, #00F0FF 0%, #0066FF 50%, #8B5CF6 100%);
+  --gradient-glow: linear-gradient(180deg, rgba(0, 240, 255, 0.15) 0%, rgba(0, 102, 255, 0.05) 100%);
+  --gradient-card: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(10, 16, 38, 0.95) 100%);
+  --gradient-surface: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+  --gradient-light: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);
+
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout & Spacing */
+  --container-max: 1280px;
+  --header-height: 80px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-cyber: 0 0 30px rgba(0, 240, 255, 0.2);
+  --shadow-purple: 0 0 30px rgba(139, 92, 246, 0.25);
+}
+
+/* CSS Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: var(--neon-cyan);
+  color: #050814;
+}
+
+/* Accessible Focus Outlines */
+:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 3px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050814;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00F0FF;
+}
+
+/* Typography Scale */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: clamp(2.1rem, 4.8vw, 3.75rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+}
+
+h4 {
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1vw + 0.5rem, 1.05rem);
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Layout Utilities */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+
+.section-py {
+  padding-top: clamp(3.5rem, 7vw, 6rem);
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+.section-py-sm {
+  padding-top: clamp(2.25rem, 4.5vw, 4rem);
+  padding-bottom: clamp(2.25rem, 4.5vw, 4rem);
+}
