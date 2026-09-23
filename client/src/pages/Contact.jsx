@@ -1,205 +1,493 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Mail, 
   Phone, 
   MapPin, 
   Clock, 
-  Send, 
   CheckCircle2, 
   Shield, 
-  MessageSquare, 
   Lock,
-  Headphones,
   ArrowRight,
-  Info
+  ChevronDown,
+  ChevronUp,
+  FileCheck,
+  Zap,
+  ExternalLink
 } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
-import Button from '../components/common/Button';
-import { companyInfo } from '../data/companyInfo';
-import { servicesData } from '../data/servicesData';
+import contactUsBg from '../assets/images/contact-us-bg.png';
+import officeUsBg from '../assets/images/office-us-bg.jpg';
+import officeUkBg from '../assets/images/office-uk-bg.jpg';
+import officeInBg from '../assets/images/office-in-bg.jpg';
 import './Contact.css';
+
+// Crisp SVG Flag Icons for all platforms (Windows fallback friendly)
+const USFlagIcon = () => (
+  <svg width="22" height="15" viewBox="0 0 741 390" className="flag-svg-icon" aria-label="USA Flag">
+    <rect width="741" height="390" fill="#B22234" rx="3" />
+    <path d="M0,30h741M0,90h741M0,150h741M0,210h741M0,270h741M0,330h741" stroke="#FFFFFF" strokeWidth="30" />
+    <rect width="296" height="210" fill="#3C3B6E" />
+    <g fill="#FFFFFF">
+      <circle cx="30" cy="21" r="8" /><circle cx="89" cy="21" r="8" /><circle cx="148" cy="21" r="8" /><circle cx="207" cy="21" r="8" /><circle cx="266" cy="21" r="8" />
+      <circle cx="60" cy="42" r="8" /><circle cx="119" cy="42" r="8" /><circle cx="178" cy="42" r="8" /><circle cx="237" cy="42" r="8" />
+      <circle cx="30" cy="63" r="8" /><circle cx="89" cy="63" r="8" /><circle cx="148" cy="63" r="8" /><circle cx="207" cy="63" r="8" /><circle cx="266" cy="63" r="8" />
+      <circle cx="60" cy="84" r="8" /><circle cx="119" cy="84" r="8" /><circle cx="178" cy="84" r="8" /><circle cx="237" cy="84" r="8" />
+      <circle cx="30" cy="105" r="8" /><circle cx="89" cy="105" r="8" /><circle cx="148" cy="105" r="8" /><circle cx="207" cy="105" r="8" /><circle cx="266" cy="105" r="8" />
+      <circle cx="60" cy="126" r="8" /><circle cx="119" cy="126" r="8" /><circle cx="178" cy="126" r="8" /><circle cx="237" cy="126" r="8" />
+      <circle cx="30" cy="147" r="8" /><circle cx="89" cy="147" r="8" /><circle cx="148" cy="147" r="8" /><circle cx="207" cy="147" r="8" /><circle cx="266" cy="147" r="8" />
+      <circle cx="60" cy="168" r="8" /><circle cx="119" cy="168" r="8" /><circle cx="178" cy="168" r="8" /><circle cx="237" cy="168" r="8" />
+      <circle cx="30" cy="189" r="8" /><circle cx="89" cy="189" r="8" /><circle cx="148" cy="189" r="8" /><circle cx="207" cy="189" r="8" /><circle cx="266" cy="189" r="8" />
+    </g>
+  </svg>
+);
+
+const UKFlagIcon = () => (
+  <svg width="22" height="15" viewBox="0 0 60 30" className="flag-svg-icon" aria-label="UK Flag">
+    <clipPath id="uk-flag-clip">
+      <rect width="60" height="30" rx="3" />
+    </clipPath>
+    <g clipPath="url(#uk-flag-clip)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFFFFF" strokeWidth="6" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="2" />
+      <path d="M30,0 v30 M0,15 h60" stroke="#FFFFFF" strokeWidth="10" />
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
+    </g>
+  </svg>
+);
+
+const INFlagIcon = () => (
+  <svg width="22" height="15" viewBox="0 0 225 150" className="flag-svg-icon" aria-label="India Flag">
+    <clipPath id="in-flag-clip">
+      <rect width="225" height="150" rx="3" />
+    </clipPath>
+    <g clipPath="url(#in-flag-clip)">
+      <rect width="225" height="50" fill="#FF9933" />
+      <rect y="50" width="225" height="50" fill="#FFFFFF" />
+      <rect y="100" width="225" height="50" fill="#138808" />
+      <circle cx="112.5" cy="75" r="18" fill="none" stroke="#000080" strokeWidth="2.5" />
+      <circle cx="112.5" cy="75" r="3.5" fill="#000080" />
+      <g stroke="#000080" strokeWidth="1">
+        {Array.from({ length: 24 }).map((_, i) => (
+          <line
+            key={i}
+            x1="112.5"
+            y1="75"
+            x2={112.5 + 18 * Math.cos((i * 15 * Math.PI) / 180)}
+            y2={75 + 18 * Math.sin((i * 15 * Math.PI) / 180)}
+          />
+        ))}
+      </g>
+    </g>
+  </svg>
+);
+
+const officialFaqs = [
+  {
+    q: "How quickly will someone contact me?",
+    a: "Our team responds to standard enquiries within one business hour. Incident response requests are triaged immediately, 24/7."
+  },
+  {
+    q: "Do you provide 24/7 incident response?",
+    a: "Yes. Our SOC operates around the clock with a dedicated incident response track for active breaches and critical alerts."
+  },
+  {
+    q: "Do you sign NDAs?",
+    a: "Yes. We routinely sign mutual NDAs before any discovery call that involves sensitive infrastructure or security details."
+  },
+  {
+    q: "Do you provide free security consultations?",
+    a: "Yes. Every engagement starts with a complimentary strategic consultation to understand your environment and goals."
+  },
+  {
+    q: "What should I include when reaching out?",
+    a: "A short description of your environment, the service you're interested in, and your timeline helps us route your enquiry to the right specialist faster."
+  }
+];
+
+const serviceOptions = [
+  "Managed SOC",
+  "VAPT Services",
+  "Cloud Security",
+  "AI Security",
+  "Network Security",
+  "Compliance & Governance",
+  "Enterprise Software Solutions",
+  "Other"
+];
+
+const countryOptions = [
+  "United States",
+  "United Kingdom",
+  "India",
+  "Australia",
+  "United Arab Emirates",
+  "Canada",
+  "Singapore",
+  "Germany",
+  "Saudi Arabia",
+  "France",
+  "Netherlands",
+  "Other"
+];
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     company: '',
-    serviceInterested: servicesData[0].title,
+    service: 'Managed SOC',
+    country: 'United States',
     message: ''
   });
 
+  useEffect(() => {
+    document.title = "Contact Netcradus | Cybersecurity Consultation & Enterprise Security";
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+    if (!formData.firstName.trim() || !formData.email.trim() || !formData.company.trim()) {
       return;
     }
     setSubmitted(true);
   };
 
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   return (
     <div className="page-contact">
-      {/* Hero */}
-      <section className="contact-hero-section cyber-grid-bg">
-        <div className="container text-center">
-          <span className="cyber-badge">
-            <span className="badge-dot" />
-            24/7 GLOBAL SECURITY OPERATIONS DESK
-          </span>
-          <h1 className="contact-hero-title">
-            Connect with Netcradus <br />
-            <span className="text-gradient-cyan">Cyber Defense Specialists</span>
-          </h1>
-          <p className="contact-hero-sub">
-            Speak directly with our cybersecurity team for enterprise risk audits, ACIS platform inquiries, or 24/7 SOC integration.
-          </p>
+      {/* 1. HERO SECTION WITH US LANDMARK BACKDROP */}
+      <section className="contact-hero-section">
+        <div className="contact-hero-backdrop">
+          <img src={contactUsBg} alt="Netcradus US & Global Cyber Defense" className="contact-hero-bg-img" />
+          <div className="contact-hero-overlay" />
+          <div className="contact-hero-cyber-particles" />
+        </div>
+
+        <div className="container contact-hero-container">
+          <div className="contact-hero-text-wrap">
+            <span className="contact-hero-eyebrow">
+              <span className="eyebrow-square" />
+              CONTACT NETCRADUS
+            </span>
+            <h1 className="contact-hero-title">
+              Enterprise Cybersecurity <br />
+              Starts With a <span className="hero-brand-orange">Conversation</span>
+            </h1>
+
+            <div className="contact-hero-divider" />
+
+            {/* Hero Trust Badges Row */}
+            <div className="contact-hero-badges-row">
+              <div className="hero-trust-badge">
+                <Phone size={14} className="badge-icon-orange" />
+                <span>24X7 SUPPORT</span>
+              </div>
+              <div className="hero-trust-badge">
+                <Clock size={14} className="badge-icon-orange" />
+                <span>1 HOUR RESPONSE</span>
+              </div>
+              <div className="hero-trust-badge">
+                <FileCheck size={14} className="badge-icon-orange" />
+                <span>NDA AVAILABLE</span>
+              </div>
+              <div className="hero-trust-badge">
+                <Shield size={14} className="badge-icon-orange" />
+                <span>ISO-COMPLIANT ENGAGEMENTS</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Global Offices Section */}
-      <section className="section-py-sm global-offices-section">
+      {/* 2. CONTACT INFORMATION + FORM (2-COLUMN LAYOUT - INDIA SITE STRUCTURE) */}
+      <section className="section-py contact-light-form-section">
         <div className="container">
-          <SectionHeader
-            badge="GLOBAL PRESENCE"
-            title="Our International"
-            highlightText="Offices & Operations"
-            subtitle="Connect directly with Netcradus engineering and client advisory teams across our global locations."
-          />
-
-          <div className="grid-2 offices-grid">
-            {/* India Office Card */}
-            <div className="glass-panel office-card">
-              <div className="office-card-header">
-                <div className="office-country-pill cyan">INDIA</div>
-                <h3 className="office-company-name">{companyInfo.offices.india.companyName}</h3>
-                <span className="office-role-tag">Global Engineering & 24/7 SOC Operations</span>
+          <div className="contact-main-grid">
+            {/* Left / Form Column: "Let's Secure Your Business" (White Card) */}
+            <div className="contact-form-card-light">
+              <div className="form-card-header">
+                <h2 className="form-card-title-light">Let's Secure Your Business</h2>
+                <p className="form-card-sub-light">Fields marked with <span className="req-star">*</span> are required.</p>
               </div>
 
-              <div className="office-details-list">
-                <div className="office-detail-row">
-                  <div className="office-icon cyan">
-                    <MapPin size={18} />
+              {submitted ? (
+                <div className="contact-success-state-light">
+                  <div className="success-icon-badge">
+                    <CheckCircle2 size={48} className="text-orange" />
                   </div>
-                  <div>
-                    <span className="detail-label">Registered Office:</span>
-                    <p className="detail-val">{companyInfo.offices.india.fullAddress}</p>
+                  <h3 className="success-title-light">Consultation Request Received</h3>
+                  <p className="success-desc-light">
+                    Thank you, <strong>{formData.firstName} {formData.lastName}</strong> from <strong>{formData.company}</strong>. Our US security engineering team will review your brief and contact you within one business hour.
+                  </p>
+                  
+                  <div className="success-summary-box-light">
+                    <div className="summary-row-light">
+                      <span className="summary-label">Selected Practice:</span>
+                      <strong className="summary-value">{formData.service}</strong>
+                    </div>
+                    <div className="summary-row-light">
+                      <span className="summary-label">Business Email:</span>
+                      <strong className="summary-value">{formData.email}</strong>
+                    </div>
+                    <div className="summary-row-light">
+                      <span className="summary-label">Direct Desk Line:</span>
+                      <a href="tel:+13024952661" className="summary-link">+1 302 495 2661</a>
+                    </div>
                   </div>
-                </div>
 
-                <div className="office-detail-row">
-                  <div className="office-icon blue">
-                    <Phone size={18} />
-                  </div>
-                  <div>
-                    <span className="detail-label">Toll-Free Helpline:</span>
-                    <p className="detail-val">
-                      <a href={`tel:${companyInfo.offices.india.tollFree.replace(/\s+/g, '')}`}>
-                        {companyInfo.offices.india.tollFree}
-                      </a>
-                    </p>
-                  </div>
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        phone: '',
+                        company: '',
+                        service: 'Managed SOC',
+                        country: 'United States',
+                        message: ''
+                      });
+                    }}
+                    className="submit-another-btn-light"
+                  >
+                    Submit Another Request
+                  </button>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="official-contact-form-light">
+                  {/* Name Row */}
+                  <div className="form-row-2">
+                    <div className="form-group">
+                      <label htmlFor="first_name">FIRST NAME <span className="req-star">*</span></label>
+                      <input 
+                        id="first_name"
+                        type="text" 
+                        required 
+                        placeholder="First Name*" 
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        className="form-input-light"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="last_name">LAST NAME <span className="req-star">*</span></label>
+                      <input 
+                        id="last_name"
+                        type="text" 
+                        required 
+                        placeholder="Last Name*" 
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        className="form-input-light"
+                      />
+                    </div>
+                  </div>
 
-                <div className="office-detail-row">
-                  <div className="office-icon purple">
-                    <Phone size={18} />
+                  {/* Contact Info Row */}
+                  <div className="form-row-2">
+                    <div className="form-group">
+                      <label htmlFor="email">BUSINESS EMAIL <span className="req-star">*</span></label>
+                      <input 
+                        id="email"
+                        type="email" 
+                        required 
+                        placeholder="Business Email*" 
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="form-input-light"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="phone">PHONE NUMBER <span className="req-star">*</span></label>
+                      <input 
+                        id="phone"
+                        type="tel" 
+                        required 
+                        placeholder="Phone Number*" 
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="form-input-light"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <span className="detail-label">24/7 Security Desk:</span>
-                    <p className="detail-val">
-                      <a href={`tel:${companyInfo.offices.india.phone.replace(/\s+/g, '')}`}>
-                        {companyInfo.offices.india.phone}
-                      </a>
-                    </p>
-                  </div>
-                </div>
 
-                <div className="office-detail-row">
-                  <div className="office-icon cyan">
-                    <Mail size={18} />
+                  {/* Company & Service Row */}
+                  <div className="form-row-2">
+                    <div className="form-group">
+                      <label htmlFor="company">COMPANY NAME <span className="req-star">*</span></label>
+                      <input 
+                        id="company"
+                        type="text" 
+                        required 
+                        placeholder="Company Name*" 
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className="form-input-light"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="service">SERVICE REQUIRED <span className="req-star">*</span></label>
+                      <select 
+                        id="service"
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="form-select-light"
+                      >
+                        {serviceOptions.map((svc) => (
+                          <option key={svc} value={svc}>{svc}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                  <div>
-                    <span className="detail-label">Official Email:</span>
-                    <p className="detail-val">
-                      <a href={`mailto:${companyInfo.offices.india.email}`}>
-                        {companyInfo.offices.india.email}
-                      </a>
-                    </p>
-                  </div>
-                </div>
 
-                <div className="office-detail-row">
-                  <div className="office-icon green">
-                    <Clock size={18} />
+                  {/* Country / Region */}
+                  <div className="form-group">
+                    <label htmlFor="country">COUNTRY / REGION</label>
+                    <select 
+                      id="country"
+                      value={formData.country}
+                      onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                      className="form-select-light"
+                    >
+                      {countryOptions.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
                   </div>
-                  <div>
-                    <span className="detail-label">Operations:</span>
-                    <p className="detail-val">{companyInfo.offices.india.hours}</p>
+
+                  {/* Message Field */}
+                  <div className="form-group">
+                    <div className="label-with-meta">
+                      <label htmlFor="message">HOW CAN WE HELP YOU?</label>
+                      <span className="char-counter-light">{formData.message.length}/600</span>
+                    </div>
+                    <textarea 
+                      id="message"
+                      rows={4}
+                      maxLength={600}
+                      placeholder="How can we help you?"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="form-textarea-light"
+                    />
+                    <span className="textarea-help-sub">A short summary of your environment and timeline helps us route this faster.</span>
                   </div>
-                </div>
-              </div>
+
+                  {/* Submit Button */}
+                  <div className="form-action-row">
+                    <button type="submit" className="contact-submit-btn-solid">
+                      <span>Request Consultation</span>
+                      <ArrowRight size={18} />
+                    </button>
+                  </div>
+
+                  {/* Encryption Footer */}
+                  <div className="form-security-footer-light">
+                    <Lock size={14} className="lock-icon-orange" />
+                    <span>Transmitted over an encrypted, secure connection.</span>
+                  </div>
+                </form>
+              )}
             </div>
 
-            {/* United States Office Card */}
-            <div className="glass-panel office-card">
-              <div className="office-card-header">
-                <div className="office-country-pill purple">UNITED STATES</div>
-                <h3 className="office-company-name">{companyInfo.offices.usa.companyName}</h3>
-                <span className="office-role-tag">North America Enterprise Operations</span>
-              </div>
+            {/* Right Column: "Get In Touch" & Direct Desk Channels (Dark Card) */}
+            <div className="contact-direct-column">
+              <div className="direct-desk-card-dark">
+                <div className="desk-header">
+                  <span className="cyber-badge-sm">DIRECT DESK</span>
+                  <h3 className="desk-title">Get In Touch</h3>
+                  <p className="desk-sub">
+                    Speak to our global engineering offices or reach our dispatch desk directly.
+                  </p>
+                </div>
 
-              <div className="office-details-list">
-                <div className="office-detail-row">
-                  <div className="office-icon purple">
-                    <MapPin size={18} />
+                {/* Call Us Block */}
+                <div className="contact-channel-block">
+                  <div className="channel-icon-box">
+                    <Phone size={20} />
                   </div>
-                  <div>
-                    <span className="detail-label">United States Office:</span>
-                    <p className="detail-val">
-                      {companyInfo.offices.usa.street}<br />
-                      {companyInfo.offices.usa.city}, {companyInfo.offices.usa.state} {companyInfo.offices.usa.postalCode}<br />
-                      {companyInfo.offices.usa.country}
-                    </p>
+                  <div className="channel-content">
+                    <span className="channel-label">CALL US</span>
+                    <a href="tel:+13024952661" className="channel-val-primary">+1 302 495 2661</a>
+                    <span className="channel-sub-info">24×7 Emergency Incident Response</span>
+                    <div className="toll-free-pill">
+                      <span>Toll-Free:</span> <a href="tel:1800121008800">1800 121 008800</a>
+                    </div>
                   </div>
                 </div>
 
-                <div className="office-detail-row">
-                  <div className="office-icon cyan">
-                    <Phone size={18} />
+                {/* Email Us Block */}
+                <div className="contact-channel-block">
+                  <div className="channel-icon-box">
+                    <Mail size={20} />
                   </div>
-                  <div>
-                    <span className="detail-label">US Phone Line:</span>
-                    <p className="detail-val">
-                      <a href={`tel:${companyInfo.offices.usa.phoneRaw}`}>
-                        {companyInfo.offices.usa.phone}
-                      </a>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="office-detail-row">
-                  <div className="office-icon blue">
-                    <Mail size={18} />
-                  </div>
-                  <div>
-                    <span className="detail-label">Official Email:</span>
-                    <p className="detail-val">
-                      <a href={`mailto:${companyInfo.offices.usa.email}`}>
-                        {companyInfo.offices.usa.email}
-                      </a>
-                    </p>
+                  <div className="channel-content">
+                    <span className="channel-label">EMAIL US</span>
+                    <div className="email-sub-item">
+                      <span className="email-type">GENERAL ENQUIRIES</span>
+                      <a href="mailto:info@netcradus.com" className="email-val">info@netcradus.com</a>
+                    </div>
+                    <div className="email-sub-item">
+                      <span className="email-type">EMERGENCY SUPPORT (24×7)</span>
+                      <a href="mailto:support@netcradus.com" className="email-val">support@netcradus.com</a>
+                    </div>
+                    <div className="email-sub-item">
+                      <span className="email-type">SALES & BUSINESS ENQUIRIES</span>
+                      <a href="mailto:sales@netcradus.com" className="email-val">sales@netcradus.com</a>
+                    </div>
                   </div>
                 </div>
 
-                <div className="office-detail-row">
-                  <div className="office-icon green">
-                    <Clock size={18} />
+                {/* Regional Nodes Summary */}
+                <div className="regional-nodes-summary">
+                  <div className="node-summary-item">
+                    <MapPin size={16} className="node-pin-icon" />
+                    <div>
+                      <strong>USA HEADQUARTERS</strong>
+                      <p>Netcradus Inc., 8 The Green, Suite B, Dover, DE 19901, United States</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="detail-label">Availability:</span>
-                    <p className="detail-val">{companyInfo.offices.usa.hours}</p>
+                  <div className="node-summary-item">
+                    <MapPin size={16} className="node-pin-icon" />
+                    <div>
+                      <strong>INDIA NODE</strong>
+                      <p>AVS City Square, Delhi NCR, India</p>
+                    </div>
                   </div>
+                  <div className="node-summary-item">
+                    <MapPin size={16} className="node-pin-icon" />
+                    <div>
+                      <strong>UK HEADQUARTERS</strong>
+                      <p>Netcradus Ltd., London Road, Leicester, LE2 0QS, England, United Kingdom</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 24/7 SOC Operations Callout */}
+                <div className="soc-ops-callout glass-card">
+                  <div className="soc-callout-header">
+                    <Zap size={16} className="text-orange" />
+                    <strong>24×7 SECURITY OPERATIONS</strong>
+                  </div>
+                  <p>
+                    Our Security Operations Center (SOC) provides continuous monitoring, incident response, and enterprise cybersecurity support around the clock.
+                  </p>
+                </div>
+
+                <div className="confidentiality-notice">
+                  <Shield size={14} className="shield-icon" />
+                  <span>Your information is securely transmitted and handled confidentially in accordance with our data policy.</span>
                 </div>
               </div>
             </div>
@@ -207,220 +495,236 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Main Consultation Section */}
-      <section className="section-py">
+      {/* 3. GLOBAL PRESENCE / OUR OFFICES SECTION */}
+      <section className="section-py cyber-grid-bg">
         <div className="container">
-          <div className="contact-main-grid">
-            {/* Left Column: Form */}
-            <div className="glass-panel contact-form-panel">
-              <h2 className="form-panel-title">Request a Security Consultation</h2>
-              <p className="form-panel-desc">
-                Complete the inquiry form below to connect with our security engineering consultants.
-              </p>
+          <SectionHeader
+            badge="FIND US"
+            title="Our Global"
+            highlightText="Offices & Locations"
+            subtitle="Visit our offices or connect with our teams across regions. We're here to support your business wherever you are."
+          />
 
-              {submitted ? (
-                <div className="contact-success-box text-center">
-                  <div className="success-icon-wrap">
-                    <CheckCircle2 size={52} className="text-cyan" />
+          <div className="offices-cards-grid">
+            {/* Office 1: United States Headquarters */}
+            <div className="official-office-card office-card-us">
+              <div className="office-card-backdrop">
+                <img src={officeUsBg} alt="USA Headquarters - New York & Delaware" className="office-card-bg-img" />
+                <div className="office-card-overlay" />
+              </div>
+              <div className="office-card-content">
+                <div className="office-flag-row">
+                  <div className="office-flag-pill">
+                    <USFlagIcon />
+                    <span className="flag-name">USA</span>
                   </div>
-                  <h3>Security Consultation Request Prepared</h3>
-                  <p className="success-body-text">
-                    Thank you, <strong>{formData.name}</strong> from <strong>{formData.company || 'your organization'}</strong>.
-                  </p>
-                  
-                  <div className="local-validation-notice glass-card">
-                    <div className="notice-icon-col">
-                      <Info size={20} className="text-cyan" />
-                    </div>
-                    <div className="notice-text-col">
-                      <strong>Direct Transmission Details:</strong>
-                      <p>
-                        To reach Netcradus instantly, send this brief to <a href={`mailto:${companyInfo.contact.email}?subject=Security Consultation Inquiry - ${encodeURIComponent(formData.serviceInterested)}&body=Name: ${encodeURIComponent(formData.name)}%0ACompany: ${encodeURIComponent(formData.company)}%0APhone: ${encodeURIComponent(formData.phone)}%0AMessage: ${encodeURIComponent(formData.message)}`}>{companyInfo.contact.email}</a> or call our 24/7 Desk at <a href={`tel:${companyInfo.contact.phone.replace(/\s+/g, '')}`}>{companyInfo.contact.phone}</a> or US Desk at <a href={`tel:${companyInfo.offices.usa.phoneRaw}`}>{companyInfo.offices.usa.phone}</a>.
-                      </p>
-                    </div>
-                  </div>
+                  <span className="office-region-badge">HEADQUARTERS</span>
+                </div>
+                <h3 className="office-location-title">UNITED STATES HEADQUARTERS</h3>
+                <p className="office-full-address">
+                  Netcradus Inc., 8 The Green, Suite B, Dover, DE 19901, United States
+                </p>
 
-                  <div className="mt-4">
-                    <Button
-                      onClick={() => {
-                        setSubmitted(false);
-                        setFormData({
-                          name: '',
-                          email: '',
-                          phone: '',
-                          company: '',
-                          serviceInterested: servicesData[0].title,
-                          message: ''
-                        });
-                      }}
-                      variant="primary"
-                      size="md"
-                    >
-                      Submit Another Consultation Request
-                    </Button>
+                <div className="office-meta-list">
+                  <div className="office-meta-item">
+                    <Clock size={16} className="meta-icon" />
+                    <span>Monday - Friday: 9:00 AM - 6:00 PM EST</span>
+                  </div>
+                  <div className="office-meta-item">
+                    <Phone size={16} className="meta-icon" />
+                    <a href="tel:+13024952661">+1 302 495 2661</a>
+                  </div>
+                  <div className="office-meta-item">
+                    <Mail size={16} className="meta-icon" />
+                    <a href="mailto:info@netcradus.com">info@netcradus.com</a>
                   </div>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="enterprise-contact-form" noValidate={false}>
-                  <div className="form-grid-2">
-                    <div className="contact-field">
-                      <label htmlFor="contact-name">Full Name *</label>
-                      <input
-                        id="contact-name"
-                        type="text"
-                        required
-                        placeholder="e.g. Alex Morgan"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        aria-required="true"
-                      />
-                    </div>
-                    <div className="contact-field">
-                      <label htmlFor="contact-email">Enterprise Work Email *</label>
-                      <input
-                        id="contact-email"
-                        type="email"
-                        required
-                        placeholder="alex@company.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        aria-required="true"
-                      />
-                    </div>
-                  </div>
 
-                  <div className="form-grid-2">
-                    <div className="contact-field">
-                      <label htmlFor="contact-phone">Phone Number *</label>
-                      <input
-                        id="contact-phone"
-                        type="tel"
-                        required
-                        placeholder="+1 / +91 ..."
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        aria-required="true"
-                      />
-                    </div>
-                    <div className="contact-field">
-                      <label htmlFor="contact-company">Company / Organization *</label>
-                      <input
-                        id="contact-company"
-                        type="text"
-                        required
-                        placeholder="e.g. Acme Corp"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        aria-required="true"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="contact-field">
-                    <label htmlFor="contact-service">Service or Platform of Interest *</label>
-                    <select
-                      id="contact-service"
-                      value={formData.serviceInterested}
-                      onChange={(e) => setFormData({ ...formData, serviceInterested: e.target.value })}
-                    >
-                      <optgroup label="Core Cybersecurity Services">
-                        {servicesData.map((svc) => (
-                          <option key={svc.id} value={svc.title}>
-                            {svc.title}
-                          </option>
-                        ))}
-                      </optgroup>
-                      <optgroup label="Flagship Platforms">
-                        <option value="ACIS - Autonomous Cyber Immune System">ACIS - Autonomous Cyber Immune System</option>
-                        <option value="Cyrix XDR / NetXDR Platform">Cyrix XDR / NetXDR Platform</option>
-                        <option value="NetCRAD AI Web Security Scanner">NetCRAD AI Web Security Scanner</option>
-                        <option value="Netcradus Enterprise CRM">Netcradus Enterprise CRM</option>
-                      </optgroup>
-                    </select>
-                  </div>
-
-                  <div className="contact-field">
-                    <label htmlFor="contact-message">Security Scope Overview / Message *</label>
-                    <textarea
-                      id="contact-message"
-                      rows="4"
-                      required
-                      placeholder="Describe your environment (endpoints, cloud workloads, compliance timelines, or threat concerns)..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      aria-required="true"
-                    />
-                  </div>
-
-                  <div className="form-submit-row">
-                    <Button type="submit" variant="primary" size="lg" icon={Send}>
-                      Submit Consultation Request
-                    </Button>
-                  </div>
-                </form>
-              )}
+                <div className="office-card-actions">
+                  <a 
+                    href="https://maps.google.com/?q=8+The+Green+Suite+B+Dover+DE+19901" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="office-directions-link"
+                  >
+                    <span>GET DIRECTIONS</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
             </div>
 
-            {/* Right Column: 24/7 Security Desk & Quick Channels */}
-            <div className="contact-info-column">
-              {/* Quick Communication Box */}
-              <div className="glass-panel info-card-box">
-                <span className="cyber-badge">DIRECT ACCESS</span>
-                <h3 className="info-box-title">Security Desk Channels</h3>
-
-                <div className="info-details-list">
-                  <div className="info-detail-item">
-                    <div className="info-icon blue">
-                      <Phone size={20} />
-                    </div>
-                    <div>
-                      <strong>India Toll-Free:</strong>
-                      <p><a href={`tel:${companyInfo.offices.india.tollFree.replace(/\s+/g, '')}`}>{companyInfo.offices.india.tollFree}</a></p>
-                    </div>
-                  </div>
-
-                  <div className="info-detail-item">
-                    <div className="info-icon purple">
-                      <Phone size={20} />
-                    </div>
-                    <div>
-                      <strong>United States Office:</strong>
-                      <p><a href={`tel:${companyInfo.offices.usa.phoneRaw}`}>{companyInfo.offices.usa.phone}</a></p>
-                    </div>
-                  </div>
-
-                  <div className="info-detail-item">
-                    <div className="info-icon cyan">
-                      <Mail size={20} />
-                    </div>
-                    <div>
-                      <strong>Official Email:</strong>
-                      <p><a href={`mailto:${companyInfo.contact.email}`}>{companyInfo.contact.email}</a></p>
-                    </div>
-                  </div>
-
-                  <div className="info-detail-item">
-                    <div className="info-icon green">
-                      <Clock size={20} />
-                    </div>
-                    <div>
-                      <strong>Operational Availability:</strong>
-                      <p>{companyInfo.contact.hours}</p>
-                    </div>
-                  </div>
-                </div>
+            {/* Office 2: United Kingdom Office */}
+            <div className="official-office-card office-card-uk">
+              <div className="office-card-backdrop">
+                <img src={officeUkBg} alt="UK Headquarters - London & Leicester" className="office-card-bg-img" />
+                <div className="office-card-overlay" />
               </div>
-
-              {/* 24/7 Threat Support Notice */}
-              <div className="glass-card threat-notice-card">
-                <div className="notice-header">
-                  <Headphones size={20} className="text-cyan" />
-                  <strong>Active Security Incident Support</strong>
+              <div className="office-card-content">
+                <div className="office-flag-row">
+                  <div className="office-flag-pill">
+                    <UKFlagIcon />
+                    <span className="flag-name">UK</span>
+                  </div>
+                  <span className="office-region-badge">EUROPE OPERATIONS</span>
                 </div>
-                <p>
-                  Experiencing an ongoing security breach, ransomware alert, or DDoS attack? Call our 24/7 rapid containment team directly at <strong>{companyInfo.contact.phone}</strong> or US desk at <strong>{companyInfo.offices.usa.phone}</strong> for instant triage.
+                <h3 className="office-location-title">UNITED KINGDOM OFFICE</h3>
+                <p className="office-full-address">
+                  Netcradus Ltd., London Road, Leicester, LE2 0QS, England, United Kingdom
                 </p>
+
+                <div className="office-meta-list">
+                  <div className="office-meta-item">
+                    <Clock size={16} className="meta-icon" />
+                    <span>Monday - Friday: 9:00 AM - 5:00 PM GMT</span>
+                  </div>
+                  <div className="office-meta-item">
+                    <Phone size={16} className="meta-icon" />
+                    <a href="tel:+447463358081">+44 7463358081</a>
+                  </div>
+                  <div className="office-meta-item">
+                    <Mail size={16} className="meta-icon" />
+                    <a href="mailto:info@netcradus.com">info@netcradus.com</a>
+                  </div>
+                </div>
+
+                <div className="office-card-actions">
+                  <a 
+                    href="https://maps.google.com/?q=London+Road+Leicester+LE2+0QS+UK" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="office-directions-link"
+                  >
+                    <span>GET DIRECTIONS</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
               </div>
+            </div>
+
+            {/* Office 3: India Headquarters */}
+            <div className="official-office-card office-card-in">
+              <div className="office-card-backdrop">
+                <img src={officeInBg} alt="India APAC Node - Delhi NCR" className="office-card-bg-img" />
+                <div className="office-card-overlay" />
+              </div>
+              <div className="office-card-content">
+                <div className="office-flag-row">
+                  <div className="office-flag-pill">
+                    <INFlagIcon />
+                    <span className="flag-name">INDIA</span>
+                  </div>
+                  <span className="office-region-badge">APAC NODE</span>
+                </div>
+                <h3 className="office-location-title">INDIA OFFICE</h3>
+                <p className="office-full-address">
+                  Office no. 609, 6th Floor, AVS City Square, Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003, India
+                </p>
+
+                <div className="office-meta-list">
+                  <div className="office-meta-item">
+                    <Clock size={16} className="meta-icon" />
+                    <span>Monday - Friday: 9:00 AM - 6:00 PM IST</span>
+                  </div>
+                  <div className="office-meta-item">
+                    <Phone size={16} className="meta-icon" />
+                    <a href="tel:+917290909571">+91 72909 09571</a>
+                  </div>
+                  <div className="office-meta-item">
+                    <Mail size={16} className="meta-icon" />
+                    <a href="mailto:info@netcradus.com">info@netcradus.com</a>
+                  </div>
+                </div>
+
+                <div className="office-card-actions">
+                  <a 
+                    href="https://maps.google.com/?q=AVS+City+Square+Raj+Nagar+Extension+Ghaziabad" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="office-directions-link"
+                  >
+                    <span>GET DIRECTIONS</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. FREQUENTLY ASKED QUESTIONS ACCORDION */}
+      <section className="section-py cyber-grid-subtle">
+        <div className="container">
+          <SectionHeader
+            badge="FAQ"
+            title="Frequently Asked"
+            highlightText="Questions"
+            subtitle="Straightforward answers regarding our consultation flow, SLA benchmarks, NDAs, and emergency incident response."
+          />
+
+          <div className="faq-accordion-wrapper max-w-850">
+            {officialFaqs.map((faq, index) => {
+              const isOpen = openFaq === index;
+              return (
+                <div key={index} className={`faq-accordion-item glass-panel ${isOpen ? 'active' : ''}`}>
+                  <button 
+                    type="button" 
+                    className="faq-question-btn"
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="faq-question-text">{faq.q}</span>
+                    <span className="faq-toggle-icon">
+                      {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="faq-answer-content">
+                      <p>{faq.a}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            <div className="faq-still-have-questions glass-card">
+              <span>Still have questions about our services or deployment models?</span>
+              <a href="mailto:info@netcradus.com" className="faq-mail-link">
+                <span>Send us a message</span>
+                <ArrowRight size={14} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FINAL CTA SECTION */}
+      <section className="section-py contact-final-cta-section cyber-grid-bg">
+        <div className="container">
+          <div className="contact-cta-card glass-panel text-center">
+            <span className="cyber-badge">
+              <span className="badge-dot" />
+              CYBER DEFENSE ON DEMAND
+            </span>
+            <h2 className="cta-heading">
+              Ready to Strengthen Your Security Posture with <br />
+              <span className="text-gradient-orange">Netcradus Autonomous Defense?</span>
+            </h2>
+            <p className="cta-sub">
+              Speak directly with our senior cybersecurity engineers to evaluate vulnerabilities, compliance requirements, or deploy custom cyber defense architectures.
+            </p>
+
+            <div className="cta-btn-group">
+              <a href="#first_name" className="cta-primary-btn">
+                <span>Talk to an Expert</span>
+                <ArrowRight size={16} />
+              </a>
+              <a href="tel:1800121008800" className="cta-secondary-btn">
+                <Phone size={16} className="btn-icon-orange" />
+                <span>Call Dispatch: 1800 121 008800</span>
+              </a>
             </div>
           </div>
         </div>

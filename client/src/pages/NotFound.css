@@ -12,7 +12,7 @@
   padding: 3.5rem 2.5rem;
   text-align: center;
   border-radius: var(--radius-xl);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  border: 1px solid rgba(255, 121, 0, 0.3);
 }
 
 .notfound-icon {

@@ -1,11 +1,12 @@
+/* Cyber Terminal - NETCRADUS Theme */
 .cyber-terminal-container {
   width: 100%;
   max-width: 620px;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.15);
-  background: rgba(8, 14, 30, 0.92);
+  border: 1px solid rgba(255, 121, 0, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 121, 0, 0.12);
+  background: rgba(10, 10, 12, 0.95);
   position: relative;
 }
 
@@ -14,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(18, 18, 20, 0.98);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -43,7 +44,7 @@
 }
 
 .terminal-icon {
-  color: var(--neon-cyan);
+  color: var(--brand-orange);
 }
 
 .terminal-badge {
@@ -53,11 +54,11 @@
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--neon-cyan);
-  background: rgba(0, 240, 255, 0.1);
+  color: var(--brand-orange);
+  background: rgba(255, 121, 0, 0.12);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  border: 1px solid rgba(255, 121, 0, 0.3);
 }
 
 .pulse-icon {
@@ -75,7 +76,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 0.75rem;
   padding: 0.6rem 0.75rem;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255, 255, 255, 0.05);
   margin-bottom: 1rem;
@@ -99,7 +100,7 @@
 }
 
 .banner-value.highlight {
-  color: var(--neon-cyan);
+  color: var(--brand-orange);
 }
 
 .banner-value.green {
@@ -134,12 +135,12 @@
   flex-shrink: 0;
 }
 
-.log-badge.info { background: rgba(56, 189, 248, 0.2); color: #38BDF8; }
+.log-badge.info { background: rgba(255, 157, 46, 0.2); color: #FF9D2E; }
 .log-badge.warn { background: rgba(245, 158, 11, 0.2); color: #F59E0B; }
 .log-badge.alert { background: rgba(239, 68, 68, 0.2); color: #EF4444; }
-.log-badge.action { background: rgba(139, 92, 246, 0.2); color: #A78BFA; }
+.log-badge.action { background: rgba(255, 121, 0, 0.2); color: #FF8A00; }
 .log-badge.success { background: rgba(16, 185, 129, 0.2); color: #34D399; }
-.log-badge.status { background: rgba(0, 240, 255, 0.2); color: #00F0FF; }
+.log-badge.status { background: rgba(255, 121, 0, 0.2); color: #FF7900; }
 
 .log-msg {
   color: var(--text-secondary);
@@ -151,7 +152,7 @@
   align-items: center;
   gap: 0.4rem;
   margin-top: 0.5rem;
-  color: var(--neon-cyan);
+  color: var(--brand-orange);
   font-size: 0.75rem;
 }
 
@@ -159,7 +160,7 @@
   display: inline-block;
   width: 6px;
   height: 14px;
-  background: var(--neon-cyan);
+  background: var(--brand-orange);
   animation: pulseGlow 1s infinite;
 }
 

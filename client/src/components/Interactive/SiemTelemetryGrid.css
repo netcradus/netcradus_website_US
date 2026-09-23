@@ -1,0 +1,906 @@
+/* ==========================================================================
+   ACIS SIEM TELEMETRY ENGINE & COMMAND-CENTER GRID
+   ========================================================================== */
+
+.siem-telemetry-root {
+  position: relative;
+  width: 100%;
+  padding: 1.5rem 0 2rem 0;
+  margin-top: 1.5rem;
+}
+
+/* 1. Subtle Background Grid & Ambient Glows */
+.siem-bg-grid {
+  position: absolute;
+  inset: -20px -30px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 30%, transparent 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.siem-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.siem-ambient-glow.orange-ambient {
+  top: 10%;
+  left: 15%;
+  width: 320px;
+  height: 320px;
+  background: #FF7900;
+}
+
+.siem-ambient-glow.cyan-ambient {
+  bottom: 15%;
+  right: 15%;
+  width: 380px;
+  height: 380px;
+  background: #38BDF8;
+}
+
+/* 2. Floating Data Particles */
+.siem-particles-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.siem-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #FF7900;
+  opacity: 0.4;
+  box-shadow: 0 0 6px #FF7900;
+  animation: particleDrift 14s infinite linear;
+}
+
+.siem-particle.p1 { top: 20%; left: 10%; animation-duration: 18s; }
+.siem-particle.p2 { top: 60%; left: 85%; animation-duration: 14s; background: #38BDF8; box-shadow: 0 0 6px #38BDF8; }
+.siem-particle.p3 { top: 80%; left: 25%; animation-duration: 22s; }
+.siem-particle.p4 { top: 35%; left: 70%; animation-duration: 16s; background: #38BDF8; box-shadow: 0 0 6px #38BDF8; }
+.siem-particle.p5 { top: 15%; left: 45%; animation-duration: 20s; }
+
+@keyframes particleDrift {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  25% { opacity: 0.6; }
+  75% { opacity: 0.6; }
+  100% { transform: translateY(-70px) scale(1.1); opacity: 0; }
+}
+
+/* 3. Interconnecting Data Pipeline SVG */
+.siem-connector-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.7;
+}
+
+.siem-bus-line {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 6;
+  animation: lineTravel 25s linear infinite;
+}
+
+.siem-bus-pulse {
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.siem-bus-pulse.pulse-1 {
+  animation: pulsePath1 7s ease-in-out infinite;
+}
+
+.siem-bus-pulse.pulse-2 {
+  animation: pulsePath2 9s ease-in-out infinite;
+}
+
+.siem-bus-pulse.pulse-3 {
+  animation: pulsePath3 11s ease-in-out infinite;
+}
+
+@keyframes lineTravel {
+  to { stroke-dashoffset: -100; }
+}
+
+@keyframes pulsePath1 {
+  0% { transform: translate(370px, 180px); opacity: 0; }
+  10% { opacity: 1; }
+  45% { transform: translate(830px, 180px); opacity: 1; }
+  50% { opacity: 0; }
+  100% { transform: translate(830px, 180px); opacity: 0; }
+}
+
+@keyframes pulsePath2 {
+  0% { transform: translate(1000px, 320px); opacity: 0; }
+  10% { opacity: 1; }
+  45% { transform: translate(1000px, 440px); opacity: 1; }
+  50% { opacity: 0; }
+  100% { transform: translate(1000px, 440px); opacity: 0; }
+}
+
+@keyframes pulsePath3 {
+  0% { transform: translate(830px, 520px); opacity: 0; }
+  10% { opacity: 1; }
+  45% { transform: translate(370px, 520px); opacity: 1; }
+  50% { opacity: 0; }
+  100% { transform: translate(370px, 520px); opacity: 0; }
+}
+
+/* 4. Top Status Header Ticker */
+.siem-pipeline-statusbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(13, 16, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.65rem 1.25rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.725rem;
+  color: #94A3B8;
+  position: relative;
+  z-index: 3;
+  backdrop-filter: blur(10px);
+}
+
+.statusbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 8px #34D399;
+  animation: liveBlink 1.8s ease-in-out infinite;
+}
+
+@keyframes liveBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.statusbar-label {
+  color: #E2E8F0;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.statusbar-sep {
+  color: rgba(255, 121, 0, 0.6);
+}
+
+.statusbar-info {
+  color: #38BDF8;
+  letter-spacing: 0.03em;
+}
+
+.statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.statusbar-step {
+  color: #64748B;
+}
+
+.step-highlight {
+  color: #FF7900;
+  font-weight: 700;
+}
+
+.statusbar-name {
+  color: #F8FAFC;
+  font-weight: 600;
+}
+
+/* 5. Capabilities Cards Grid */
+.siem-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  position: relative;
+  z-index: 3;
+}
+
+/* 6. Card Surface & Layout */
+.siem-card {
+  position: relative;
+  background: linear-gradient(175deg, #12151D 0%, #0D0F14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.75rem 1.6rem 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
+
+.siem-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 121, 0, 0.45);
+  box-shadow: 0 18px 40px -10px rgba(255, 121, 0, 0.15), 
+              0 0 20px rgba(255, 121, 0, 0.08), 
+              inset 0 1px 0 rgba(255, 121, 0, 0.3);
+}
+
+.siem-card.is-active {
+  border-color: rgba(255, 121, 0, 0.6);
+  box-shadow: 0 16px 36px -8px rgba(255, 121, 0, 0.2), 
+              0 0 25px rgba(255, 121, 0, 0.12),
+              inset 0 1px 0 rgba(255, 121, 0, 0.4);
+}
+
+/* Corner HUD Brackets */
+.card-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  opacity: 0.4;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.siem-card:hover .card-corner,
+.siem-card.is-active .card-corner {
+  opacity: 0.9;
+  border-color: #FF7900 !important;
+}
+
+.card-corner.tl { top: 6px; left: 6px; border-top: 1.5px solid rgba(255, 255, 255, 0.3); border-left: 1.5px solid rgba(255, 255, 255, 0.3); }
+.card-corner.tr { top: 6px; right: 6px; border-top: 1.5px solid rgba(255, 255, 255, 0.3); border-right: 1.5px solid rgba(255, 255, 255, 0.3); }
+.card-corner.bl { bottom: 6px; left: 6px; border-bottom: 1.5px solid rgba(255, 255, 255, 0.3); border-left: 1.5px solid rgba(255, 255, 255, 0.3); }
+.card-corner.br { bottom: 6px; right: 6px; border-bottom: 1.5px solid rgba(255, 255, 255, 0.3); border-right: 1.5px solid rgba(255, 255, 255, 0.3); }
+
+/* Card Top Bar: Icon Orb & Tag */
+.siem-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.siem-icon-box {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 121, 0, 0.08);
+  border: 1px solid rgba(255, 121, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF7900;
+  transition: all 0.3s ease;
+}
+
+.siem-card:hover .siem-icon-box,
+.siem-card.is-active .siem-icon-box {
+  background: rgba(255, 121, 0, 0.16);
+  border-color: #FF7900;
+  box-shadow: 0 0 16px rgba(255, 121, 0, 0.35);
+  transform: scale(1.05);
+}
+
+.icon-pulse-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  pointer-events: none;
+}
+
+.siem-card.is-active .icon-pulse-ring {
+  border-color: rgba(255, 121, 0, 0.4);
+  animation: ringPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+.siem-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.siem-stage-idx {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: #64748B;
+  font-weight: 700;
+}
+
+.siem-card-tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* Card Typography */
+.siem-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin-bottom: 0.65rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.siem-card-desc {
+  font-size: 0.865rem;
+  color: #94A3B8;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  min-height: 64px;
+}
+
+/* 7. Micro-Telemetry Visual Containers */
+.siem-visual-box {
+  background: #080A0F;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.85rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Visual 1: Telemetry Stream Bars */
+.visual-stream-container {
+  width: 100%;
+}
+
+.stream-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  color: #64748B;
+  margin-bottom: 0.5rem;
+}
+
+.stream-rate {
+  color: #FF7900;
+  font-weight: 700;
+}
+
+.stream-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.stream-bar {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stream-packet {
+  position: absolute;
+  top: 0;
+  left: -25%;
+  height: 100%;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, #FF7900, #38BDF8, transparent);
+  border-radius: 3px;
+  animation: streamFlow 2.2s infinite ease-in-out;
+}
+
+.stream-bar.bar-1 .stream-packet { animation-delay: 0s; width: 45%; }
+.stream-bar.bar-2 .stream-packet { animation-delay: 0.6s; width: 30%; background: linear-gradient(90deg, transparent, #38BDF8, transparent); }
+.stream-bar.bar-3 .stream-packet { animation-delay: 1.1s; width: 50%; }
+.stream-bar.bar-4 .stream-packet { animation-delay: 1.6s; width: 35%; background: linear-gradient(90deg, transparent, #38BDF8, transparent); }
+
+@keyframes streamFlow {
+  0% { left: -30%; }
+  100% { left: 110%; }
+}
+
+.stream-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.58rem;
+  color: #475569;
+}
+
+/* Visual 2: Live Waveform */
+.visual-waveform-container {
+  width: 100%;
+}
+
+.waveform-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  color: #64748B;
+  margin-bottom: 0.3rem;
+}
+
+.wave-status {
+  color: #34D399;
+  font-weight: 700;
+}
+
+.waveform-svg {
+  width: 100%;
+  height: 38px;
+}
+
+.waveform-path-base {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1.5;
+}
+
+.waveform-path-pulse {
+  fill: none;
+  stroke: #38BDF8;
+  stroke-width: 2;
+  stroke-dasharray: 40 160;
+  animation: waveTravel 2.8s linear infinite;
+  filter: drop-shadow(0 0 4px #38BDF8);
+}
+
+@keyframes waveTravel {
+  0% { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.anomaly-ping {
+  fill: #FF7900;
+  filter: drop-shadow(0 0 4px #FF7900);
+  animation: anomalyBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes anomalyBlink {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.waveform-footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.58rem;
+  color: #64748B;
+  margin-top: 0.2rem;
+}
+
+.anomaly-tag {
+  color: #34D399;
+}
+
+/* Visual 3: YARA-X / Sigma Code Scanner */
+.visual-scanner-container {
+  width: 100%;
+}
+
+.scanner-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  color: #64748B;
+  margin-bottom: 0.35rem;
+}
+
+.scan-active-dot {
+  color: #FF7900;
+  font-weight: 700;
+}
+
+.scanner-code-window {
+  position: relative;
+  background: #040608;
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  line-height: 1.45;
+  color: #CBD5E1;
+  overflow: hidden;
+}
+
+.scan-line-laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #FF7900, #38BDF8, transparent);
+  box-shadow: 0 0 6px #FF7900;
+  animation: scanLaser 2.4s ease-in-out infinite;
+}
+
+@keyframes scanLaser {
+  0% { top: 0; opacity: 0.2; }
+  50% { top: 85%; opacity: 0.9; }
+  100% { top: 0; opacity: 0.2; }
+}
+
+.code-kw { color: #FF7900; font-weight: 700; }
+.code-prop { color: #38BDF8; }
+.code-str { color: #34D399; }
+.code-op { color: #A78BFA; }
+
+/* Visual 4: MITRE Connected Nodes */
+.visual-nodes-container {
+  width: 100%;
+}
+
+.nodes-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  color: #64748B;
+  margin-bottom: 0.6rem;
+}
+
+.nodes-matrix {
+  color: #38BDF8;
+  font-weight: 700;
+}
+
+.nodes-canvas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.4rem;
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.node-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.node-dot.active {
+  background: #FF7900;
+  border-color: #FFAA5A;
+  box-shadow: 0 0 8px #FF7900;
+  animation: nodeActivePulse 1.8s infinite ease-in-out;
+}
+
+@keyframes nodeActivePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 6px #FF7900; }
+  50% { transform: scale(1.3); box-shadow: 0 0 12px #FF7900; }
+}
+
+.node-txt {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.58rem;
+  color: #94A3B8;
+}
+
+.node-link {
+  flex: 1;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  margin: 0 0.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.node-link::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 40%;
+  height: 3.5px;
+  background: #38BDF8;
+  border-radius: 2px;
+  animation: nodeSignal 2s infinite ease-in-out;
+}
+
+.node-link.link-2::after { animation-delay: 0.5s; background: #FF7900; }
+.node-link.link-3::after { animation-delay: 1.0s; }
+
+@keyframes nodeSignal {
+  0% { left: 0%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: 70%; opacity: 0; }
+}
+
+/* Visual 5: Dynamic Risk Scoring Dial */
+.visual-gauge-container {
+  width: 100%;
+}
+
+.gauge-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  color: #64748B;
+  margin-bottom: 0.3rem;
+}
+
+.risk-badge-sub {
+  color: #34D399;
+  font-weight: 700;
+}
+
+.gauge-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.gauge-dial {
+  position: relative;
+  width: 80px;
+  height: 46px;
+}
+
+.dial-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dial-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.dial-value {
+  fill: none;
+  stroke: #34D399;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 95;
+  filter: drop-shadow(0 0 4px #34D399);
+}
+
+.dial-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-mono, monospace);
+}
+
+.dial-num {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #F8FAFC;
+}
+
+.dial-max {
+  font-size: 0.58rem;
+  color: #64748B;
+}
+
+.gauge-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.g-metric {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.58rem;
+}
+
+.gm-lbl { color: #64748B; }
+.gm-val { color: #38BDF8; font-weight: 700; }
+.gm-val.low { color: #34D399; }
+
+/* Visual 6: Terminal & SPL Query Engine */
+.visual-terminal-container {
+  width: 100%;
+}
+
+.term-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  color: #64748B;
+  margin-bottom: 0.3rem;
+}
+
+.term-lat {
+  color: #38BDF8;
+  font-weight: 700;
+}
+
+.term-body {
+  background: #040608;
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6rem;
+}
+
+.term-prompt {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.prompt-sym { color: #FF7900; font-weight: 700; }
+.term-cmd { color: #F8FAFC; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.term-output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.log-row {
+  color: #34D399;
+  font-size: 0.55rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.log-row.dim {
+  color: #64748B;
+}
+
+/* 8. Card Bottom Status & Metric Footer */
+.siem-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin-top: auto;
+  font-family: var(--font-mono, monospace);
+}
+
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 6px #34D399;
+}
+
+.siem-card:hover .status-live-dot,
+.siem-card.is-active .status-live-dot {
+  background: #FF7900;
+  box-shadow: 0 0 8px #FF7900;
+}
+
+.status-live-text {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #E2E8F0;
+  letter-spacing: 0.05em;
+}
+
+.status-state-text {
+  font-size: 0.58rem;
+  color: #64748B;
+  letter-spacing: 0.03em;
+}
+
+.footer-metric .metric-val {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #FF7900;
+  background: rgba(255, 121, 0, 0.08);
+  border: 1px solid rgba(255, 121, 0, 0.25);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* 9. Responsive Adjustments */
+@media (max-width: 1100px) {
+  .siem-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .siem-connector-svg {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .siem-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .siem-pipeline-statusbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .siem-card-desc {
+    min-height: auto;
+  }
+}
+
+/* 10. Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .siem-particle,
+  .siem-bus-line,
+  .siem-bus-pulse,
+  .stream-packet,
+  .waveform-path-pulse,
+  .scan-line-laser,
+  .node-link::after,
+  .live-dot {
+    animation: none !important;
+  }
+  .siem-card {
+    transition: none !important;
+  }
+}

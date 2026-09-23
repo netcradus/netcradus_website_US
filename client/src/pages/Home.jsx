@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, 
   Activity, 
   Cpu, 
   Zap, 
   Lock, 
-  Layers, 
-  Database, 
   ArrowRight, 
   CheckCircle, 
-  Server, 
   FileCheck,
   CheckCircle2,
-  AlertTriangle,
   Building2,
   ShoppingCart,
   DollarSign,
@@ -23,15 +17,13 @@ import {
 import Hero from '../components/Hero/Hero';
 import SectionHeader from '../components/common/SectionHeader';
 import ServiceCard from '../components/ServiceCard/ServiceCard';
-import ProductCard from '../components/ProductCard/ProductCard';
 import ThreatRadar from '../components/Interactive/ThreatRadar';
 import CTASection from '../components/CTA/CTASection';
 import Button from '../components/common/Button';
 
 import { servicesData } from '../data/servicesData';
-import { productsData, platformTiers } from '../data/productsData';
 import { testimonialsData, industryCaseStudies } from '../data/careersData';
-import { companyInfo } from '../data/companyInfo';
+import ClientLogo from '../components/common/ClientLogo';
 import './Home.css';
 
 const industryIcons = {
@@ -43,80 +35,12 @@ const industryIcons = {
 };
 
 export default function Home() {
-  const [selectedTier, setSelectedTier] = useState(platformTiers[0]);
-
   return (
     <div className="page-home">
       {/* 1. Hero Section */}
       <Hero />
 
-      {/* 2. Company Introduction & 7-Tier Architecture */}
-      <section className="section-py cyber-grid-subtle">
-        <div className="container">
-          <SectionHeader
-            badge="CONVERGED DEFENSE ECOSYSTEM"
-            title="Seven Converged Platforms Working As"
-            highlightText="One Intelligent Cyber Defense System"
-            subtitle="Discover AI-powered cybersecurity, cloud, and digital transformation solutions designed to protect, automate, and accelerate your organization through a unified architecture."
-          />
-
-          <div className="platform-interactive-wrapper glass-panel">
-            {/* Tier Tabs */}
-            <div className="platform-tiers-nav">
-              {platformTiers.map((tier) => (
-                <button
-                  key={tier.id}
-                  type="button"
-                  className={`platform-tier-tab ${selectedTier.id === tier.id ? 'active' : ''}`}
-                  onClick={() => setSelectedTier(tier)}
-                  aria-label={`Select ${tier.title}`}
-                >
-                  <span className="tier-tab-title">{tier.title}</span>
-                  <span className="tier-tab-sub">{tier.subtitle}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Selected Tier Deep-Dive Panel */}
-            <div className="platform-tier-details">
-              <div className="tier-badge-row">
-                <span className="cyber-badge">
-                  <span className="badge-dot" />
-                  CONVERGED LAYER
-                </span>
-                <span className="tier-id-tag">TIER ID: {selectedTier.id.toUpperCase()}</span>
-              </div>
-
-              <h3 className="selected-tier-title">{selectedTier.title}</h3>
-              <p className="selected-tier-subtitle text-gradient-cyan">{selectedTier.subtitle}</p>
-              <p className="selected-tier-desc">{selectedTier.description}</p>
-
-              <div className="tier-capabilities-box">
-                <span className="capabilities-label">Core Capabilities:</span>
-                <div className="capabilities-grid">
-                  {selectedTier.capabilities.map((cap, idx) => (
-                    <div key={idx} className="tier-cap-item">
-                      <CheckCircle2 size={16} className="cap-icon cyan" />
-                      <span>{cap}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="tier-action-row">
-                <Button to={`/products#tier-${selectedTier.id}`} variant="primary" size="md" icon={ArrowRight}>
-                  Explore Full Specification
-                </Button>
-                <Link to="/services" className="tier-learn-link">
-                  See Associated Managed Services →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Core Cybersecurity Services */}
+      {/* 2. Core Cybersecurity Services */}
       <section className="section-py">
         <div className="container">
           <SectionHeader
@@ -156,7 +80,7 @@ export default function Home() {
               <p className="acis-tagline-lead">Single Agent • Single Console • Autonomous Cyber Defense</p>
               
               <p className="acis-body-copy">
-                Netcradus engineers the future of cyber defense. Through our ACIS platform, we combine AI-driven threat detection, automated response, and enterprise-grade resilience to protect what matters most — before threats even strike.
+                Stay Ahead of Threats — Real-Time, Every Time, with Netcradus.
               </p>
 
               <div className="acis-highlights-list">
@@ -310,8 +234,13 @@ export default function Home() {
                 </div>
                 <p className="testimonial-quote">"{test.quote}"</p>
                 <div className="testimonial-author-block">
-                  <strong className="author-title">{test.company}</strong>
-                  <span className="author-org">{test.industry}</span>
+                  <div className="testimonial-author-info">
+                    <strong className="author-title">{test.company}</strong>
+                    <span className="author-org">{test.industry}</span>
+                  </div>
+                  <div className="testimonial-logo-badge" title={`${test.company} Logo`}>
+                    <ClientLogo logoKey={test.logoKey} company={test.company} />
+                  </div>
                 </div>
               </div>
             ))}

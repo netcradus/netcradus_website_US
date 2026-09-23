@@ -102,28 +102,36 @@ export const careersData = {
 // Verified Client Testimonials from live site
 export const testimonialsData = [
   {
+    id: "oouraa",
     company: "OOURAA",
     industry: "Healthcare Technology",
     quote: "Netcradus helped us strengthen our cybersecurity posture with 24×7 SOC monitoring, proactive threat detection, and continuous vulnerability assessments. Their team delivered enterprise-grade security with exceptional responsiveness and technical expertise.",
-    result: "Continuous 24/7 SOC Protection"
+    result: "Continuous 24/7 SOC Protection",
+    logoKey: "oouraa"
   },
   {
+    id: "online-pantry",
     company: "Online Pantry",
     industry: "E-Commerce & Retail",
     quote: "Partnering with Netcradus significantly improved our security operations. Their SIEM monitoring, cloud security solutions, and rapid incident response helped us protect customer data and maintain uninterrupted business operations.",
-    result: "Sub-15m Rapid Incident Response"
+    result: "Sub-15m Rapid Incident Response",
+    logoKey: "online-pantry"
   },
   {
+    id: "vastraalane",
     company: "Vastraalane",
     industry: "Technology & Digital Solutions",
     quote: "Netcradus has been a reliable cybersecurity partner, helping us improve threat visibility, security monitoring, and infrastructure protection.",
-    result: "100% Threat Visibility Across Nodes"
+    result: "100% Threat Visibility Across Nodes",
+    logoKey: "vastraalane"
   },
   {
+    id: "cyberhaxs",
     company: "CyberHaxs",
     industry: "Cybersecurity & Risk Management",
     quote: "Working with Netcradus enhanced our security operations through AI-powered monitoring, rapid incident response, and strategic cybersecurity guidance.",
-    result: "AI-Powered Threat Correlation"
+    result: "AI-Powered Threat Correlation",
+    logoKey: "cyberhaxs"
   }
 ];
 

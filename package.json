@@ -1,5 +1,12 @@
 {
-  "dependencies": {
-    "puppeteer-core": "^25.11.0"
+  "name": "netcradus-website-us",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Netcradus Enterprise Cybersecurity & ACIS Platform Website",
+  "scripts": {
+    "dev": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "lint": "npm --prefix client run lint",
+    "preview": "npm --prefix client run preview"
   }
 }

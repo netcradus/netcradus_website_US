@@ -1,0 +1,406 @@
+/* CyberRobot - Upgraded ACIS AI Presenter (Light Background Theme) */
+
+.cyber-robot-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 195px;
+  flex-shrink: 0;
+  user-select: none;
+  z-index: 20;
+}
+
+/* ================================================= */
+/* 1. HOLOGRAPHIC INFORMATION BUBBLE                 */
+/* ================================================= */
+.robot-holo-bubble {
+  position: relative;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1.5px solid rgba(255, 121, 0, 0.55);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  margin-bottom: 0.65rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(255, 121, 0, 0.18);
+  backdrop-filter: blur(12px);
+  animation: holoFloat 3s ease-in-out infinite alternate;
+}
+
+@keyframes holoFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+/* Hologram Corner Brackets */
+.holo-bracket {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: #FF9D2E;
+  pointer-events: none;
+}
+.holo-bracket.top-left { top: -1px; left: -1px; border-top: 2px solid #FF9D2E; border-left: 2px solid #FF9D2E; }
+.holo-bracket.top-right { top: -1px; right: -1px; border-top: 2px solid #FF9D2E; border-right: 2px solid #FF9D2E; }
+.holo-bracket.bottom-left { bottom: -1px; left: -1px; border-bottom: 2px solid #FF9D2E; border-left: 2px solid #FF9D2E; }
+.holo-bracket.bottom-right { bottom: -1px; right: -1px; border-bottom: 2px solid #FF9D2E; border-right: 2px solid #FF9D2E; }
+
+.holo-header {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.2rem;
+}
+
+.holo-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 6px #34D399;
+}
+
+.holo-tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #FF9D2E;
+  letter-spacing: 0.05em;
+}
+
+.holo-sub {
+  font-family: var(--font-display, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.holo-meta {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6rem;
+  color: #38BDF8;
+  margin-top: 0.2rem;
+  letter-spacing: 0.02em;
+}
+
+.holo-projector-line {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid rgba(255, 121, 0, 0.55);
+}
+
+/* ================================================= */
+/* 2. DYNAMIC TERMINAL STATUS TAG                    */
+/* ================================================= */
+.robot-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(14, 24, 48, 0.9);
+  border: 1px solid rgba(255, 122, 0, 0.5);
+  padding: 0.28rem 0.8rem;
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ff7a00;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+  box-shadow: 0 0 15px rgba(255, 122, 0, 0.2);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+.robot-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 7px #10B981;
+  animation: robotBeacon 1.6s infinite ease-in-out;
+}
+
+.cyber-robot-wrapper.is-paused .robot-status-dot {
+  background: #F59E0B;
+  box-shadow: 0 0 7px #F59E0B;
+}
+
+@keyframes robotBeacon {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+/* ================================================= */
+/* 3. MAIN ROBOT FIGURE & AMBIENT BASE               */
+/* ================================================= */
+.robot-figure {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: robotBreathingHover 3.4s ease-in-out infinite alternate;
+}
+
+@keyframes robotBreathingHover {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.6deg); }
+  100% { transform: translateY(2px) rotate(-0.4deg); }
+}
+
+.robot-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25));
+}
+
+/* Ambient Soft Light Beneath Robot Base */
+.robot-ground-light {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 25px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 121, 0, 0.35) 0%, rgba(255, 157, 46, 0.15) 50%, transparent 80%);
+  filter: blur(8px);
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.pose-pushing .robot-ground-light {
+  width: 160px;
+  height: 35px;
+  background: radial-gradient(ellipse at center, rgba(255, 121, 0, 0.65) 0%, rgba(255, 157, 46, 0.35) 50%, transparent 80%);
+  filter: blur(10px);
+}
+
+/* Thruster Jet Beam */
+.robot-thruster-energy {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 28px;
+  pointer-events: none;
+}
+
+.thrust-beam {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at top, rgba(255, 121, 0, 0.85) 0%, rgba(56, 189, 248, 0.4) 60%, transparent 100%);
+  border-radius: 50%;
+  animation: thrustPulse 0.4s infinite alternate ease-in-out;
+  filter: blur(2.5px);
+}
+
+@keyframes thrustPulse {
+  0% { transform: scaleX(0.85) scaleY(0.8); opacity: 0.75; }
+  100% { transform: scaleX(1.2) scaleY(1.25); opacity: 1; filter: blur(3px) drop-shadow(0 0 10px #FF7900); }
+}
+
+/* Core Reactor Pulse */
+.robot-core-pulse {
+  animation: coreGlow 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes coreGlow {
+  0% { opacity: 0.75; filter: drop-shadow(0 0 3px #FF7900); }
+  100% { opacity: 1; filter: drop-shadow(0 0 10px #FFB347); }
+}
+
+/* Antenna Beacon */
+.antenna-beacon {
+  animation: antennaBlink 1.4s infinite ease-in-out;
+}
+
+@keyframes antennaBlink {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Visor Eyes Blinking & Scanning */
+.eye-left, .eye-right {
+  transform-origin: center;
+  animation: eyeScan 4.2s infinite ease-in-out;
+}
+
+@keyframes eyeScan {
+  0%, 45%, 55%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.12); }
+}
+
+/* ================================================= */
+/* 4. POSE ANIMATIONS & ARM KINETICS                 */
+/* ================================================= */
+.arm-limb-group {
+  transform-origin: 132px 114px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.robot-head-group {
+  transform-origin: 95px 70px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pose 1: IDLE */
+.pose-idle .arm-limb-group { transform: rotate(0deg); }
+.pose-idle .robot-head-group { transform: rotate(3deg); }
+
+/* Pose 2: POINTING */
+.pose-pointing .robot-head-group { transform: rotate(8deg) translateX(3px); }
+.pose-pointing .arm-limb-group { transform: rotate(-14deg) translateY(-3px); }
+.pose-pointing .pointer-laser-beam {
+  opacity: 1;
+  animation: laserPulse 1s infinite alternate;
+}
+
+@keyframes laserPulse {
+  0% { opacity: 0.6; stroke-width: 1.5; }
+  100% { opacity: 1; stroke-width: 2.5; filter: drop-shadow(0 0 4px #38BDF8); }
+}
+
+/* Pose 3: PREPARING PUSH */
+.pose-preparing_push .robot-head-group { transform: rotate(-3deg); }
+.pose-preparing_push .arm-limb-group { transform: rotate(22deg) translateX(-8px); }
+.pose-preparing_push .palm-emitter-glow {
+  animation: chargePalm 0.25s infinite alternate;
+}
+
+@keyframes chargePalm {
+  0% { transform: scale(1); filter: drop-shadow(0 0 3px #FF7900); }
+  100% { transform: scale(1.7); filter: drop-shadow(0 0 12px #FF7900); }
+}
+
+/* Pose 4: PUSHING */
+.pose-pushing .robot-figure {
+  animation: none;
+  transform: translateX(18px) rotate(5deg);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pose-pushing .robot-head-group { transform: rotate(10deg); }
+.pose-pushing .arm-limb-group { transform: rotate(-32deg) translateX(12px) translateY(-8px); }
+.pose-pushing .push-energy-wave {
+  opacity: 1;
+  animation: waveBurst 0.65s ease-out forwards;
+}
+
+@keyframes waveBurst {
+  0% { opacity: 0; transform: scale(0.6) translateX(-5px); }
+  40% { opacity: 1; transform: scale(1.4) translateX(16px); }
+  100% { opacity: 0; transform: scale(1.9) translateX(35px); }
+}
+
+/* Pose 5: PRESENTING */
+.pose-presenting .arm-limb-group { transform: rotate(-10deg) translateY(-4px); }
+.pose-presenting .robot-head-group { transform: rotate(6deg); }
+
+/* ================================================= */
+/* 5. DATA PARTICLES & ENERGY BRIDGE                 */
+/* ================================================= */
+.robot-energy-bridge {
+  position: absolute;
+  top: 55%;
+  right: -25px;
+  width: 45px;
+  height: 60px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.energy-stream-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #FF7900 0%, #FFB347 50%, transparent 100%);
+  opacity: 0;
+  transform-origin: left;
+  transition: opacity 0.3s ease;
+}
+
+.pose-pointing .energy-stream-line,
+.pose-pushing .energy-stream-line,
+.pose-presenting .energy-stream-line {
+  opacity: 0.85;
+  animation: energyLineFlow 1.2s infinite linear;
+}
+
+@keyframes energyLineFlow {
+  0% { transform: scaleX(0.2) translateX(0); opacity: 0.3; }
+  50% { transform: scaleX(1) translateX(10px); opacity: 1; }
+  100% { transform: scaleX(0.2) translateX(25px); opacity: 0; }
+}
+
+.spark-particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.sp-1 { width: 3px; height: 3px; background: #FF7900; box-shadow: 0 0 6px #FF7900; top: 30%; left: 10%; }
+.sp-2 { width: 4px; height: 4px; background: #38BDF8; box-shadow: 0 0 6px #38BDF8; top: 50%; left: 30%; }
+.sp-3 { width: 2.5px; height: 2.5px; background: #FFB347; box-shadow: 0 0 4px #FFB347; top: 70%; left: 20%; }
+.sp-4 { width: 3px; height: 3px; background: #10B981; box-shadow: 0 0 5px #10B981; top: 40%; left: 55%; }
+
+.pose-pushing .spark-particle,
+.pose-presenting .spark-particle {
+  animation: sparkDrift 0.8s infinite ease-out;
+}
+
+.sp-1 { animation-delay: 0.1s; }
+.sp-2 { animation-delay: 0.25s; }
+.sp-3 { animation-delay: 0.4s; }
+.sp-4 { animation-delay: 0.55s; }
+
+@keyframes sparkDrift {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  40% { opacity: 1; transform: translate(12px, -6px) scale(1.2); }
+  100% { transform: translate(28px, -12px) scale(0.4); opacity: 0; }
+}
+
+/* ================================================= */
+/* 6. RESPONSIVE BREAKPOINTS                         */
+/* ================================================= */
+@media (max-width: 1024px) {
+  .cyber-robot-wrapper {
+    width: 160px;
+  }
+  .robot-figure {
+    height: 190px;
+  }
+  .robot-energy-bridge {
+    right: -15px;
+    width: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cyber-robot-wrapper {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 0.5rem auto;
+  }
+  .robot-holo-bubble {
+    width: 240px;
+  }
+  .robot-figure {
+    height: 160px;
+  }
+  .robot-energy-bridge {
+    display: none;
+  }
+}

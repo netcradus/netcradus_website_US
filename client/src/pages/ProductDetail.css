@@ -1,0 +1,414 @@
+.page-product-detail {
+  min-height: 100vh;
+}
+
+/* Breadcrumbs */
+.product-breadcrumb-bar {
+  background: rgba(5, 5, 5, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 0;
+  font-size: 0.8rem;
+}
+
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
+.breadcrumb-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-nav a:hover {
+  color: var(--brand-orange);
+}
+
+.bc-sep {
+  color: var(--text-muted);
+}
+
+.bc-current {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* Product Hero */
+.product-hero-section {
+  padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.product-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.product-hero-title {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.15;
+}
+
+.product-hero-tagline {
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.product-hero-lead {
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  color: var(--brand-orange);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.product-hero-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  max-width: 680px;
+}
+
+.product-hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.product-hero-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.product-hero-stat-card {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  border-color: rgba(255, 121, 0, 0.2);
+  background: rgba(14, 14, 18, 0.75);
+}
+
+.p-hero-val {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.p-hero-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  display: block;
+}
+
+/* Features Grid */
+.product-feats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.product-feat-card {
+  padding: 2.25rem 1.75rem;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.product-feat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 121, 0, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 121, 0, 0.12);
+}
+
+.feat-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 121, 0, 0.1);
+  border: 1px solid rgba(255, 121, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-orange);
+  margin-bottom: 1.25rem;
+}
+
+.feat-card-title {
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.feat-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Workflow Grid */
+.product-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.product-workflow-card {
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.wf-badge-step {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--brand-orange);
+  background: rgba(255, 121, 0, 0.08);
+  border: 1px solid rgba(255, 121, 0, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
+
+.wf-card-title {
+  font-size: 1.15rem;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.wf-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Use Cases */
+.product-usecases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.product-uc-card {
+  padding: 2.25rem 1.75rem;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.uc-icon-wrap {
+  margin-bottom: 1rem;
+}
+
+.uc-title {
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  margin-bottom: 0.65rem;
+}
+
+.uc-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* Quick Nav Platform Switcher Strip */
+.product-suite-nav-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.product-quick-nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 2rem auto 0;
+}
+
+.quick-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  background: rgba(14, 14, 18, 0.6);
+}
+
+.quick-nav-pill:hover {
+  border-color: rgba(255, 121, 0, 0.45);
+  background: rgba(255, 121, 0, 0.08);
+  transform: translateY(-2px);
+  color: var(--brand-orange);
+}
+
+.pill-nav-icon {
+  color: var(--brand-orange);
+  flex-shrink: 0;
+}
+
+.pill-nav-arrow {
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.quick-nav-pill:hover .pill-nav-arrow {
+  transform: translateX(3px);
+  color: var(--brand-orange);
+}
+
+/* Dashboard Preview Mockup Frame */
+.product-dashboard-frame {
+  position: relative;
+  background: #0D0F14;
+  border: 1px solid rgba(255, 121, 0, 0.35);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 121, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-dashboard-frame:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 121, 0, 0.6);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 121, 0, 0.2);
+}
+
+.dashboard-frame-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #151922;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.6rem 1rem;
+  gap: 0.75rem;
+}
+
+.frame-traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.t-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.t-dot.red { background: #EF4444; }
+.t-dot.yellow { background: #F59E0B; }
+.t-dot.green { background: #10B981; }
+
+.frame-address-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  color: #94A3B8;
+  max-width: 280px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.lock-icon {
+  color: #34D399;
+  flex-shrink: 0;
+}
+
+.frame-status-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.frame-status-badge.live {
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.dashboard-frame-canvas {
+  position: relative;
+  width: 100%;
+  background: #080A0F;
+  overflow: hidden;
+}
+
+.dashboard-screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-dashboard-frame:hover .dashboard-screenshot-img {
+  transform: scale(1.015);
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .product-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-hero-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .product-feats-grid,
+  .product-usecases-grid,
+  .product-workflow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .product-hero-stats-row,
+  .product-feats-grid,
+  .product-usecases-grid,
+  .product-workflow-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-quick-nav-pills {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

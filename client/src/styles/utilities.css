@@ -3,21 +3,21 @@
 /* Background Grid Overlay */
 .cyber-grid-bg {
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.12) 0%, transparent 60%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    radial-gradient(circle at 50% 0%, rgba(255, 121, 0, 0.08) 0%, transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 100% 100%, 48px 48px, 48px 48px;
   background-color: var(--bg-primary);
 }
 
 .cyber-grid-subtle {
   background-image: 
-    linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 121, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 121, 0, 0.03) 1px, transparent 1px);
   background-size: 40px 40px, 40px 40px;
 }
 
-/* Light Section Surface (for visual contrast) */
+/* Light Section Surface (Dark balanced) */
 .section-light {
   background: var(--gradient-light);
   color: var(--text-light-heading);
@@ -52,7 +52,7 @@
 }
 
 .glass-panel {
-  background: rgba(10, 16, 38, 0.75);
+  background: rgba(13, 13, 15, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-subtle);
@@ -60,15 +60,10 @@
 }
 
 /* Gradient Text */
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #00F0FF 0%, #38BDF8 50%, #0066FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-purple {
-  background: linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%);
+.text-gradient-cyan,
+.text-gradient-purple,
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FF9D2E 0%, #FF7900 50%, #E85D00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -92,17 +87,17 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--neon-cyan);
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--brand-orange);
+  background: rgba(255, 121, 0, 0.08);
+  border: 1px solid rgba(255, 121, 0, 0.25);
   border-radius: var(--radius-full);
   backdrop-filter: blur(8px);
 }
 
 .cyber-badge.purple {
-  color: #C084FC;
-  background: rgba(192, 132, 252, 0.1);
-  border-color: rgba(192, 132, 252, 0.3);
+  color: #FF9D2E;
+  background: rgba(255, 157, 46, 0.1);
+  border-color: rgba(255, 157, 46, 0.3);
 }
 
 .cyber-badge.green {

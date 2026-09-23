@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  Briefcase, 
   MapPin, 
   Clock, 
   CheckCircle2, 
   ArrowRight, 
   Send, 
-  Check, 
-  Users, 
-  Sparkles,
-  Shield,
   X,
   Info,
   DollarSign

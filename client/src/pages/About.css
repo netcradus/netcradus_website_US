@@ -46,15 +46,15 @@
 }
 
 .icon-box.cyan {
-  color: #00F0FF;
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+  color: #FF7900;
+  border: 1px solid rgba(255, 121, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 121, 0, 0.15);
 }
 
 .icon-box.purple {
-  color: #C084FC;
-  border: 1px solid rgba(192, 132, 252, 0.3);
-  box-shadow: 0 0 15px rgba(192, 132, 252, 0.15);
+  color: #FF9D2E;
+  border: 1px solid rgba(255, 157, 46, 0.3);
+  box-shadow: 0 0 15px rgba(255, 157, 46, 0.15);
 }
 
 .card-badge-label {
@@ -96,8 +96,8 @@
   color: var(--text-primary);
 }
 
-.bullet-icon.cyan { color: #00F0FF; }
-.bullet-icon.purple { color: #C084FC; }
+.bullet-icon.cyan { color: #FF7900; }
+.bullet-icon.purple { color: #FF9D2E; }
 
 /* Capability Boxes */
 .capability-box {
@@ -109,7 +109,7 @@
   font-family: var(--font-mono);
   font-size: 1.5rem;
   font-weight: 800;
-  color: rgba(0, 240, 255, 0.25);
+  color: rgba(255, 121, 0, 0.25);
   margin-bottom: 0.75rem;
 }
 
@@ -140,7 +140,7 @@
 }
 
 .presence-card:hover {
-  border-color: rgba(0, 240, 255, 0.4);
+  border-color: rgba(255, 121, 0, 0.4);
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
@@ -166,14 +166,14 @@
 
 .presence-country-pill.cyan {
   color: var(--neon-cyan);
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: rgba(255, 121, 0, 0.1);
+  border: 1px solid rgba(255, 121, 0, 0.3);
 }
 
 .presence-country-pill.purple {
-  color: #C084FC;
-  background: rgba(139, 92, 246, 0.12);
-  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #FF9D2E;
+  background: rgba(255, 157, 46, 0.12);
+  border: 1px solid rgba(255, 157, 46, 0.35);
 }
 
 .presence-company-title {

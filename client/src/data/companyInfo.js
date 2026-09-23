@@ -1,12 +1,25 @@
 export const companyInfo = {
   name: "Netcradus",
-  legalName: "Netcradus Pvt Ltd",
+  legalName: "Netcradus Inc.",
   tagline: "Autonomous Cyber Immune Systems & Enterprise Cybersecurity",
   headline: "Intelligent • Adaptive • Autonomous Cyber Protection",
-  description: "Netcradus engineers the future of cyber defense. Through our ACIS platform, we combine AI-driven threat detection, automated response, and enterprise-grade resilience to protect what matters most — before threats even strike.",
+  description: "Stay Ahead of Threats — Real-Time, Every Time, with Netcradus.",
   
   // Global Office Locations
   offices: {
+    uk: {
+      countryLabel: "UNITED KINGDOM",
+      companyName: "Netcradus UK Ltd",
+      tag: "UK HEADQUARTERS",
+      street: "104 A London Road",
+      city: "Leicester",
+      state: "Leicestershire",
+      postalCode: "LE2 0QS",
+      country: "United Kingdom",
+      fullAddress: "104 A London Road, Leicester, LE2 0QS, United Kingdom",
+      email: "info@netcradus.com",
+      hours: "24/7 Global Security Operations"
+    },
     india: {
       countryLabel: "INDIA",
       companyName: "Netcradus Pvt Ltd",

@@ -25,7 +25,7 @@ const iconMap = {
   HeartPulse
 };
 
-export default function ServiceCard({ service, onSelect }) {
+export default function ServiceCard({ service }) {
   const IconComponent = iconMap[service.icon] || ShieldCheck;
 
   return (
@@ -58,7 +58,7 @@ export default function ServiceCard({ service, onSelect }) {
           <span className="sla-dot" />
           <span>{service.sla}</span>
         </div>
-        <Link to={`/services#${service.id}`} className="service-learn-more">
+        <Link to={`/services/${service.id}`} className="service-learn-more">
           <span>Explore Capabilities</span>
           <ArrowRight size={15} className="arrow-icon" />
         </Link>

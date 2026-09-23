@@ -1,3 +1,4 @@
+/* Service Card - NETCRADUS Theme */
 .cyber-service-card {
   padding: 2rem 1.75rem;
   display: flex;
@@ -5,6 +6,10 @@
   position: relative;
   overflow: hidden;
   height: 100%;
+  background: #141416;
+  border: 1px solid rgba(255, 121, 0, 0.12);
+  border-radius: var(--radius-lg);
+  transition: all 0.35s ease;
 }
 
 .service-card-glow {
@@ -15,17 +20,24 @@
   height: 120px;
   border-radius: 50%;
   pointer-events: none;
-  opacity: 0.2;
+  opacity: 0.15;
   transition: opacity 0.3s ease;
+  background: radial-gradient(circle, #FF7900 0%, transparent 70%);
+}
+
+.cyber-service-card:hover {
+  border-color: rgba(255, 121, 0, 0.45);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 121, 0, 0.18);
+  transform: translateY(-4px);
 }
 
 .cyber-service-card:hover .service-card-glow {
-  opacity: 0.45;
+  opacity: 0.4;
 }
 
-.accent-cyan .service-card-glow { background: radial-gradient(circle, #00F0FF 0%, transparent 70%); }
-.accent-blue .service-card-glow { background: radial-gradient(circle, #0066FF 0%, transparent 70%); }
-.accent-purple .service-card-glow { background: radial-gradient(circle, #8B5CF6 0%, transparent 70%); }
+.accent-cyan .service-card-glow { background: radial-gradient(circle, #FF7900 0%, transparent 70%); }
+.accent-blue .service-card-glow { background: radial-gradient(circle, #FF8A00 0%, transparent 70%); }
+.accent-purple .service-card-glow { background: radial-gradient(circle, #FF9D2E 0%, transparent 70%); }
 
 .service-card-top {
   display: flex;
@@ -41,17 +53,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 20, 22, 0.95);
+  border: 1px solid rgba(255, 121, 0, 0.25);
+  color: var(--brand-orange);
+  box-shadow: 0 0 15px rgba(255, 121, 0, 0.15);
   transition: all 0.3s ease;
 }
 
-.service-icon-box.cyan { color: #00F0FF; border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 0 15px rgba(0, 240, 255, 0.15); }
-.service-icon-box.blue { color: #38BDF8; border-color: rgba(56, 189, 248, 0.3); box-shadow: 0 0 15px rgba(56, 189, 248, 0.15); }
-.service-icon-box.purple { color: #C084FC; border-color: rgba(192, 132, 252, 0.3); box-shadow: 0 0 15px rgba(192, 132, 252, 0.15); }
+.service-icon-box.cyan { color: #FF7900; border-color: rgba(255, 121, 0, 0.3); }
+.service-icon-box.blue { color: #FF8A00; border-color: rgba(255, 138, 0, 0.3); }
+.service-icon-box.purple { color: #FF9D2E; border-color: rgba(255, 157, 46, 0.3); }
 
 .cyber-service-card:hover .service-icon-box {
   transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255, 121, 0, 0.35);
 }
 
 .service-tag-badge {
@@ -100,7 +115,7 @@
 }
 
 .cap-icon {
-  color: var(--neon-cyan);
+  color: var(--brand-orange);
   margin-top: 2px;
   flex-shrink: 0;
 }
@@ -121,15 +136,15 @@
   font-family: var(--font-mono);
   font-size: 0.725rem;
   font-weight: 600;
-  color: var(--neon-cyan);
+  color: var(--brand-orange);
 }
 
 .sla-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--neon-cyan);
-  box-shadow: 0 0 6px var(--neon-cyan);
+  background: var(--brand-orange);
+  box-shadow: 0 0 6px var(--brand-orange);
 }
 
 .service-learn-more {
@@ -146,7 +161,7 @@
 }
 
 .cyber-service-card:hover .service-learn-more {
-  color: var(--neon-cyan);
+  color: var(--brand-orange);
 }
 
 .cyber-service-card:hover .service-learn-more .arrow-icon {

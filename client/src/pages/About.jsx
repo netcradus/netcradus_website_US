@@ -1,20 +1,12 @@
 import React from 'react';
 import { 
-  ShieldCheck, 
   Target, 
   Eye, 
-  Award, 
   Lock, 
-  Server, 
-  CheckCircle2, 
-  ArrowRight,
-  Activity,
-  Globe2,
-  Users
+  CheckCircle2
 } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
 import CTASection from '../components/CTA/CTASection';
-import Button from '../components/common/Button';
 import StatsCounter from '../components/common/StatsCounter';
 import { companyInfo } from '../data/companyInfo';
 import './About.css';
@@ -40,7 +32,7 @@ export default function About() {
       </section>
 
       {/* Mission & Vision Section */}
-      <section className="section-py">
+      <section className="section-py" id="mission-vision">
         <div className="container">
           <div className="grid-2 mission-vision-grid">
             <div className="glass-card mission-vision-card">
@@ -83,7 +75,7 @@ export default function About() {
       </section>
 
       {/* Core Capabilities */}
-      <section className="section-py cyber-grid-subtle">
+      <section className="section-py cyber-grid-subtle" id="why-us">
         <div className="container">
           <SectionHeader
             badge="ENTERPRISE STRENGTHS"

@@ -1,0 +1,401 @@
+/* ==========================================================================
+   NETCRADUS ACIS — AUTONOMOUS CYBER IMMUNE SYSTEM
+   Theme: Deep Cinematic Workspace + Netcradus Orange + Electric Cyan & Threat Crimson
+   ========================================================================== */
+
+.page-acis {
+  background-color: #040812;
+  color: #c9d6e4;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   1. CINEMATIC HERO SECTION
+   ========================================================================== */
+.acis-cinematic-hero {
+  position: relative;
+  min-height: calc(100vh - 40px);
+  padding-top: 130px;
+  padding-bottom: 4rem;
+  background-color: #030712;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Cinematic Photorealistic Background Layer (High Visibility, Positioned Right) */
+.acis-hero-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/images/acis-threat-interception.jpg');
+  background-size: cover;
+  background-position: right 65% center;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Soft Left Dark Gradient Overlay for Text Readability without blocking right visual */
+.acis-hero-gradient-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, 
+      rgba(3, 7, 18, 0.98) 0%, 
+      rgba(3, 7, 18, 0.94) 28%, 
+      rgba(3, 7, 18, 0.75) 42%, 
+      rgba(3, 7, 18, 0.20) 58%, 
+      rgba(3, 7, 18, 0.0) 75%),
+    linear-gradient(180deg, 
+      rgba(3, 7, 18, 0.6) 0%, 
+      rgba(3, 7, 18, 0.0) 25%, 
+      rgba(3, 7, 18, 0.0) 75%, 
+      rgba(3, 7, 18, 0.95) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Subtle background typography */
+.acis-bg-quote {
+  position: absolute;
+  top: 140px;
+  right: 5%;
+  font-family: var(--font-display, inherit);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.12);
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 2;
+  text-align: right;
+}
+
+/* Hero Container - Shifted cleanly to the left edge */
+.acis-hero-container {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding-left: clamp(1.25rem, 4vw, 5rem);
+  padding-right: clamp(1.25rem, 4vw, 5rem);
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* ----------------- LEFT HERO CONTENT ----------------- */
+.acis-hero-left-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 530px;
+  width: 100%;
+}
+
+/* Badge: ACIS | AUTONOMOUS CYBER IMMUNE SYSTEM */
+.acis-hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(14, 24, 46, 0.85);
+  border: 1px solid rgba(255, 122, 0, 0.45);
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(255, 122, 0, 0.2);
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(10px);
+  width: fit-content;
+}
+
+.acis-badge-shield-icon {
+  color: #ff7a00;
+}
+
+.acis-badge-title-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.acis-badge-title-text span {
+  color: #ff7a00;
+}
+
+/* Main Heading */
+.acis-hero-main-title {
+  font-family: var(--font-display, inherit);
+  font-size: clamp(2.2rem, 3.4vw, 3.1rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.1rem 0;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #ff8c00 0%, #ff6200 60%, #ff4500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+/* Subtitle */
+.acis-hero-lead-text {
+  font-size: 0.975rem;
+  color: #94a9c2;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+/* 4 Feature Pillars: 2x2 Compact Grid docked strictly on left */
+.acis-pillars-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+  max-width: 520px;
+}
+
+.acis-pillar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: rgba(10, 22, 44, 0.75);
+  border: 1px solid rgba(0, 170, 255, 0.18);
+  border-radius: 12px;
+  padding: 0.85rem 0.75rem;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.acis-pillar-card:hover {
+  border-color: rgba(255, 122, 0, 0.5);
+  background: rgba(16, 32, 60, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), 0 0 12px rgba(255, 122, 0, 0.2);
+}
+
+.pillar-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+  border: 1px solid;
+  transition: transform 0.25s ease;
+}
+
+.acis-pillar-card:hover .pillar-icon-box {
+  transform: scale(1.1);
+}
+
+/* Individual pillar colors */
+.pillar-icon-box.orange {
+  background: rgba(255, 122, 0, 0.12);
+  border-color: rgba(255, 122, 0, 0.5);
+  color: #ff7a00;
+  box-shadow: 0 0 10px rgba(255, 122, 0, 0.25);
+}
+
+.pillar-icon-box.cyan {
+  background: rgba(0, 212, 255, 0.12);
+  border-color: rgba(0, 212, 255, 0.5);
+  color: #00d4ff;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.25);
+}
+
+.pillar-icon-box.green {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+.pillar-icon-box.purple {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.5);
+  color: #c084fc;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.25);
+}
+
+.pillar-title {
+  font-family: var(--font-display, inherit);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.2rem 0;
+}
+
+.pillar-desc {
+  font-size: 0.7rem;
+  color: #8da4be;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Call to Action Buttons */
+.acis-hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-acis-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #ff7a00 0%, #ff5500 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.925rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4), 0 0 12px rgba(255, 122, 0, 0.2);
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-acis-primary:hover {
+  background: linear-gradient(135deg, #ff8c1a 0%, #ff6600 100%);
+  box-shadow: 0 8px 26px rgba(255, 122, 0, 0.55), 0 0 20px rgba(255, 122, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-acis-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(14, 24, 46, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.925rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.btn-acis-secondary:hover {
+  border-color: rgba(255, 122, 0, 0.5);
+  background: rgba(20, 36, 68, 0.9);
+  color: #ff7a00;
+  transform: translateY(-2px);
+}
+
+/* Bottom Trust & Metadata Row */
+.acis-hero-trust-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.acis-hero-bottom-ticker {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #617b99;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.acis-hero-bottom-ticker span {
+  color: #ff7a00;
+}
+
+.trust-mini-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(10, 22, 44, 0.6);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94a9c2;
+}
+
+.trust-chip svg {
+  color: #00d4ff;
+}
+
+/* ==========================================================================
+   RESPONSIVE HERO BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 992px) {
+  .acis-cinematic-hero {
+    padding-top: 110px;
+    padding-bottom: 3.5rem;
+    min-height: auto;
+  }
+
+  .acis-hero-gradient-left {
+    background: 
+      linear-gradient(90deg, 
+        rgba(3, 7, 18, 0.95) 0%, 
+        rgba(3, 7, 18, 0.88) 60%, 
+        rgba(3, 7, 18, 0.75) 100%);
+  }
+
+  .acis-hero-left-col {
+    max-width: 100%;
+  }
+
+  .acis-pillars-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .acis-cinematic-hero {
+    padding-top: 95px;
+    padding-bottom: 2.5rem;
+  }
+
+  .acis-pillars-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .acis-hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-acis-primary,
+  .btn-acis-secondary {
+    justify-content: center;
+  }
+}

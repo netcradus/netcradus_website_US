@@ -1,32 +1,39 @@
 import React from 'react';
-import { ArrowRight, ShieldCheck, Play, Lock, Activity } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 import Button from '../common/Button';
-import CyberTerminal from '../Interactive/CyberTerminal';
-import ThreatRadar from '../Interactive/ThreatRadar';
 import StatsCounter from '../common/StatsCounter';
 import { companyInfo } from '../../data/companyInfo';
 import './Hero.css';
 
 export default function Hero() {
   return (
-    <section className="cyber-hero-section cyber-grid-bg">
+    <section className="cyber-hero-section">
+      {/* Background Video Layer */}
+      <div className="hero-video-container" aria-hidden="true">
+        <video
+          className="hero-bg-video"
+          src="/background.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-video-overlay" />
+        <div className="hero-orange-overlay" />
+      </div>
+
       <div className="hero-glow-sphere" />
-      <div className="hero-purple-sphere" />
 
-      <div className="container">
+      <div className="container hero-container-content">
         <div className="hero-content-grid">
-          {/* Left Column: Messaging & CTAs */}
+          {/* Messaging & CTAs */}
           <div className="hero-text-col">
-            <div className="hero-badge-container">
-              <span className="cyber-badge">
-                <span className="badge-dot" />
-                AUTONOMOUS CYBER IMMUNE SYSTEM
-              </span>
-            </div>
-
             <h1 className="hero-headline">
               Intelligent • Adaptive • <br />
-              <span className="text-gradient-cyan">Autonomous Cyber Defense</span>
+              <span className="hero-highlight-text">Autonomous Cyber Defense</span>
             </h1>
 
             <p className="hero-supporting-text">
@@ -41,28 +48,6 @@ export default function Hero() {
                 Explore ACIS Platform
               </Button>
             </div>
-
-            <div className="hero-trust-indicators">
-              <div className="trust-indicator-item">
-                <span className="trust-check-icon">✓</span>
-                <span>Sub-15m Rapid Incident Containment</span>
-              </div>
-              <div className="trust-indicator-item">
-                <span className="trust-check-icon">✓</span>
-                <span>24/7/365 Dedicated SOC & SIEM</span>
-              </div>
-              <div className="trust-indicator-item">
-                <span className="trust-check-icon">✓</span>
-                <span>Zero-Trust Micro-Segmentation</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Live Cyber Telemetry Visual */}
-          <div className="hero-visual-col">
-            <div className="hero-visual-stack">
-              <CyberTerminal />
-            </div>
           </div>
         </div>
 
@@ -74,3 +59,4 @@ export default function Hero() {
     </section>
   );
 }
+

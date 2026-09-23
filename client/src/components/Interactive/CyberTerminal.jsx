@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Shield, CheckCircle2, AlertTriangle, Activity } from 'lucide-react';
+import { Terminal, Activity } from 'lucide-react';
 import './CyberTerminal.css';
 
 const logsData = [
@@ -13,7 +13,7 @@ const logsData = [
 
 export default function CyberTerminal() {
   const [activeLogs, setActiveLogs] = useState(logsData.slice(0, 3));
-  const [status, setStatus] = useState('ACTIVE DEFENSE');
+  const status = 'ACTIVE DEFENSE';
 
   useEffect(() => {
     const interval = setInterval(() => {
