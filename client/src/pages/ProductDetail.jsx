@@ -53,8 +53,7 @@ const productDashboardMap = {
   },
   'pam': {
     src: pamDashboardImg,
-    url: 'app.netcradus.com/cyrix-xdr/zero-trust-pam',
-    badge: 'PRIVILEGED VAULT',
+    showFrameBar: false,
     alt: 'NetCradus PAM Privileged Access & Zero Trust'
   },
   'grc': {
@@ -139,24 +138,26 @@ export default function ProductDetail() {
 
             <div className="product-hero-visual">
               {dashboardData ? (
-                <div className="product-dashboard-frame glass-panel">
-                  <div className="dashboard-frame-bar">
-                    <div className="frame-traffic-lights">
-                      <span className="t-dot red" />
-                      <span className="t-dot yellow" />
-                      <span className="t-dot green" />
+                <div className={`product-dashboard-frame glass-panel ${dashboardData.showFrameBar === false ? 'frame-clean-image' : ''}`}>
+                  {dashboardData.showFrameBar !== false && (
+                    <div className="dashboard-frame-bar">
+                      <div className="frame-traffic-lights">
+                        <span className="t-dot red" />
+                        <span className="t-dot yellow" />
+                        <span className="t-dot green" />
+                      </div>
+                      <div className="frame-address-bar">
+                        <Lock size={11} className="lock-icon" />
+                        <span>{dashboardData.url}</span>
+                      </div>
+                      <span className="frame-status-badge live">● {dashboardData.badge}</span>
                     </div>
-                    <div className="frame-address-bar">
-                      <Lock size={11} className="lock-icon" />
-                      <span>{dashboardData.url}</span>
-                    </div>
-                    <span className="frame-status-badge live">● {dashboardData.badge}</span>
-                  </div>
+                  )}
                   <div className="dashboard-frame-canvas">
                     <img 
                       src={dashboardData.src} 
                       alt={dashboardData.alt} 
-                      className="dashboard-screenshot-img"
+                      className="dashboard-screenshot-img" 
                     />
                   </div>
                 </div>

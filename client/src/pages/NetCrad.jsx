@@ -1,403 +1,781 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
-  Search, 
-  AlertTriangle, 
-  CheckCircle2, 
-  FileCode, 
+  Shield, 
   Activity, 
-  ArrowRight, 
+  Layers, 
+  Lock, 
+  Radio, 
+  Crosshair, 
+  Check, 
+  ArrowRight,
+  FileCode,
+  FileText,
+  AlertTriangle,
+  Server,
+  Zap,
+  CheckCircle2,
+  Filter,
+  BarChart3,
   Download,
-  Globe,
-  Zap
+  Terminal,
+  ShieldCheck,
+  Code,
+  Users
 } from 'lucide-react';
-import SectionHeader from '../components/common/SectionHeader';
-import CTASection from '../components/CTA/CTASection';
-import Button from '../components/common/Button';
+import newScanImg from '../assets/images/netcrad-new-scan.png';
+import scanProgressImg from '../assets/images/netcrad-scan-progress.png';
+import resultsImg from '../assets/images/netcrad-results.png';
+import scanHistoryImg from '../assets/images/netcrad-scan-history.png';
+import ctaHorizonImg from '../assets/images/about-cta-horizon.jpg';
 import './NetCrad.css';
 
-const auditCapabilities = [
-  {
-    icon: Search,
-    title: "AI-Powered Website Intelligence",
-    desc: "Advanced vulnerability scanning engine that identifies deep security flaws, logic bugs, and misconfigurations using intelligent behavioral analysis."
-  },
-  {
-    icon: Zap,
-    title: "One-Click Security Audit",
-    desc: "Simply enter your website domain URL to initiate a comprehensive multi-vector security, SSL/TLS, and header assessment within minutes."
-  },
-  {
-    icon: AlertTriangle,
-    title: "Comprehensive Risk Scoring",
-    desc: "Every detected vulnerability is contextualized and scored across standard severity tiers: Critical, High, Medium, Low, and Informational."
-  },
-  {
-    icon: FileCode,
-    title: "Actionable Dev Remediation Guides",
-    desc: "Every issue includes business risk impact, root-cause explanation, code snippets, web server config templates, and best practice fixes."
-  },
-  {
-    icon: Download,
-    title: "Professional PDF & CSV Reports",
-    desc: "Generate comprehensive audit evidence reports suitable for executive leadership, compliance auditors, developers, and DevOps teams."
-  },
-  {
-    icon: Activity,
-    title: "Continuous Automated Monitoring",
-    desc: "Monitor critical web assets continuously and receive instantaneous alerts when new CVEs, expired certificates, or configuration drifts occur."
-  }
-];
-
-const auditCategories = [
-  {
-    category: "OWASP TOP 10 WEB DEFENSE",
-    title: "Full-Stack Web Application Vulnerability Scan",
-    description: "Deep inspection detecting SQL Injection (SQLi), Cross-Site Scripting (XSS), Server-Side Request Forgery (SSRF), Cross-Origin Resource Sharing (CORS) misconfigurations, and Broken Access Control.",
-    checks: [
-      "SQL Injection & NoSQL database exploits",
-      "Cross-Site Scripting (Stored, Reflected, DOM-based XSS)",
-      "Authentication bypass & Broken Session Management",
-      "Insecure Direct Object References (IDOR)",
-      "Server-Side Request Forgery (SSRF) & Open Redirects"
-    ],
-    badge: "100% OWASP COVERAGE"
-  },
-  {
-    category: "CRYPTOGRAPHIC HYGIENE",
-    title: "SSL / TLS & HTTP Security Header Verification",
-    description: "Evaluates transport layer security strength, certificate chains, weak cipher suites, and mandatory browser security header configurations to prevent MITM attacks.",
-    checks: [
-      "TLS 1.3 / 1.2 protocol compliance & deprecated cipher alerts",
-      "HTTP Strict Transport Security (HSTS) validation",
-      "Content Security Policy (CSP) & X-Frame-Options",
-      "Referrer-Policy, Permissions-Policy & Cross-Origin policies",
-      "Certificate expiration & revocation verification"
-    ],
-    badge: "A+ SSL HYGIENE"
-  },
-  {
-    category: "SURFACE & CONFIGURATION AUDIT",
-    title: "Server Misconfiguration & Information Leakage",
-    description: "Identifies exposed administrative consoles, dangling subdomains, directory traversal vulnerabilities, sensitive environment files (.env, .git), and server version fingerprinting.",
-    checks: [
-      "Publicly accessible backup & configuration files (.git, .env, .sql)",
-      "Exposed administrative portals & Swagger/OpenAPI endpoints",
-      "Server banner grabbing & component vulnerability detection",
-      "Dangling DNS CNAME records & subdomain takeover risks",
-      "Insecure cookies (Missing Secure, HttpOnly, SameSite flags)"
-    ],
-    badge: "ZERO INFORMATION LEAK"
-  }
-];
-
-const scanSteps = [
-  {
-    step: "01",
-    title: "Enter Target Domain",
-    desc: "Input your web application or corporate domain URL into NetCrad."
-  },
-  {
-    step: "02",
-    title: "Automated Reconnaissance",
-    desc: "Engine crawls endpoints, maps attack surface, and discovers technologies."
-  },
-  {
-    step: "03",
-    title: "Deep Vulnerability Audit",
-    desc: "AI scanners execute non-intrusive security checks across OWASP vectors."
-  },
-  {
-    step: "04",
-    title: "Actionable Fix Report",
-    desc: "Receive instant executive summary and developer remediation guide."
-  }
-];
-
 export default function NetCrad() {
-  const [scanUrl, setScanUrl] = useState('');
-  const [isScanning, setIsScanning] = useState(false);
-  const [scanResult, setScanResult] = useState(null);
-
-  const handleScanSubmit = (e) => {
-    e.preventDefault();
-    if (!scanUrl) return;
-
-    setIsScanning(true);
-    setScanResult(null);
-
-    setTimeout(() => {
-      setIsScanning(false);
-      setScanResult({
-        url: scanUrl.startsWith('http') ? scanUrl : `https://${scanUrl}`,
-        score: 94,
-        grade: 'A',
-        ssl: 'Valid TLS 1.3 (2048-bit RSA)',
-        headers: '5/6 Recommended Configured',
-        vulnerabilities: 0,
-        warnings: 2,
-        time: '1.4s'
-      });
-    }, 1800);
-  };
+  useEffect(() => {
+    document.title = "NETCRAD | Vulnerability Assessment & Security Scanner";
+  }, []);
 
   return (
-    <div className="page-netcrad">
-      {/* Hero Section */}
-      <section className="netcrad-hero-section cyber-grid-bg">
-        <div className="container">
-          <div className="netcrad-hero-grid">
-            <div className="netcrad-hero-text">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-orange-500/20 bg-orange-500/10 mb-4">
-                <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-                <span className="text-xs font-bold tracking-wider uppercase text-orange-400">
-                  Netcrad Website Audit Tool
-                </span>
+    <div className="netcrad-product-page">
+      {/* =========================================================================
+          SECTION 1: HERO
+          ========================================================================= */}
+      <section className="nc-hero-section">
+        <div className="nc-ambient-glow nc-glow-hero" />
+        <div className="nc-grid-matrix" />
+
+        <div className="nc-container nc-hero-grid">
+          {/* Left Column: Heading & Value Props */}
+          <div className="nc-hero-text-col">
+            <div className="nc-eyebrow">
+              <span className="nc-eyebrow-dot" />
+              VULNERABILITY ASSESSMENT PLATFORM
+            </div>
+
+            <h1 className="nc-hero-heading">
+              Find Vulnerabilities <br className="nc-hero-br-desktop" />
+              Before <span className="nc-text-orange-glow">Attackers Do.</span>
+            </h1>
+
+            <p className="nc-hero-subtext">
+              NETCRAD helps organizations discover security weaknesses across websites and digital assets, turning technical findings into clear, actionable security insights.
+            </p>
+
+            <div className="nc-hero-cta-group">
+              <Link to="/contact" className="nc-btn-primary">
+                START A SECURITY SCAN
+                <ArrowRight size={17} className="nc-btn-icon" />
+              </Link>
+              <a href="#how-it-works" className="nc-btn-ghost">
+                SEE HOW IT WORKS
+              </a>
+            </div>
+
+            {/* 3 Compact Value Indicators */}
+            <div className="nc-hero-indicators">
+              <div className="nc-indicator-item">
+                <Shield size={16} className="nc-ind-icon" />
+                <div className="nc-ind-text">
+                  <strong>Identify Security Risks</strong>
+                  <span>Across your attack surface</span>
+                </div>
               </div>
-
-              <h1 className="netcrad-hero-title">
-                Discover Security Risks <br />
-                <span className="text-gradient-cyan">Before Hackers Do</span>
-              </h1>
-
-              <p className="netcrad-hero-desc">
-                Netcrad is an intelligent Website Security Audit platform that scans your website for security vulnerabilities, configuration weaknesses, performance issues, and compliance risks—helping you secure your digital presence before attackers can exploit it.
-              </p>
-
-              {/* Interactive Audit Input Form */}
-              <form onSubmit={handleScanSubmit} className="netcrad-scan-form">
-                <div className="scan-input-wrapper">
-                  <Globe size={18} className="scan-globe-icon" />
-                  <input
-                    type="text"
-                    placeholder="Enter website URL (e.g. yourcompany.com)"
-                    value={scanUrl}
-                    onChange={(e) => setScanUrl(e.target.value)}
-                    className="scan-url-input"
-                    required
-                  />
-                  <button 
-                    type="submit" 
-                    className="scan-submit-btn"
-                    disabled={isScanning}
-                  >
-                    {isScanning ? (
-                      <>
-                        <span className="spinner-border" />
-                        <span>Auditing...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Audit Website</span>
-                        <ArrowRight size={16} />
-                      </>
-                    )}
-                  </button>
+              <div className="nc-indicator-item">
+                <Crosshair size={16} className="nc-ind-icon" />
+                <div className="nc-ind-text">
+                  <strong>Prioritize What Matters</strong>
+                  <span>With CVSS scoring</span>
                 </div>
-              </form>
-
-              {/* Live Simulated Result Box */}
-              {scanResult && (
-                <div className="netcrad-result-card glass-card animate-fade-in mt-4">
-                  <div className="result-header">
-                    <div className="result-grade-circle">
-                      <span className="grade-letter">{scanResult.grade}</span>
-                      <span className="grade-score">{scanResult.score}/100</span>
-                    </div>
-                    <div className="result-target-info">
-                      <h4 className="result-domain">{scanResult.url}</h4>
-                      <p className="result-meta">Audit completed in {scanResult.time} • Ready for download</p>
-                    </div>
-                  </div>
-
-                  <div className="result-badges-row">
-                    <span className="res-badge green">✓ {scanResult.ssl}</span>
-                    <span className="res-badge blue">✓ {scanResult.headers}</span>
-                    <span className="res-badge orange">⚠ {scanResult.warnings} Low Risk Warnings</span>
-                  </div>
-
-                  <div className="result-cta-row">
-                    <Button to="/contact" variant="primary" size="sm" icon={Download}>
-                      Request Full Technical Audit PDF
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              <div className="netcrad-quick-stats">
-                <div className="q-stat">
-                  <span className="q-val text-gradient-cyan">100%</span>
-                  <span className="q-lbl">OWASP Top 10 Coverage</span>
-                </div>
-                <div className="q-stat">
-                  <span className="q-val text-gradient-purple">&lt; 60s</span>
-                  <span className="q-lbl">Scan Velocity</span>
-                </div>
-                <div className="q-stat">
-                  <span className="q-val" style={{ color: '#34D399' }}>Instant</span>
-                  <span className="q-lbl">Dev Remediation Reports</span>
+              </div>
+              <div className="nc-indicator-item">
+                <Activity size={16} className="nc-ind-icon" />
+                <div className="nc-ind-text">
+                  <strong>Strengthen Your Defenses</strong>
+                  <span>Before it's too late</span>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Visual Panel */}
-            <div className="netcrad-hero-visual">
-              <div className="glass-panel audit-preview-card">
-                <div className="audit-card-top">
-                  <div className="audit-dots">
-                    <span className="dot red" />
-                    <span className="dot yellow" />
-                    <span className="dot green" />
-                  </div>
-                  <span className="audit-title-tag">NETCRAD://AUDIT-ENGINE-V2</span>
-                  <span className="audit-live-status">LIVE AUDITING</span>
+          {/* Right Column: Real NETCRAD "New Scan" Dashboard Screenshot */}
+          <div className="nc-hero-visual-col" aria-label="NETCRAD Vulnerability Scanner Dashboard">
+            <div className="nc-dashboard-frame nc-hero-dashboard">
+              <div className="nc-frame-glow-aura" />
+              <div className="nc-browser-bar">
+                <div className="nc-browser-dots">
+                  <span className="nc-dot-red" />
+                  <span className="nc-dot-yellow" />
+                  <span className="nc-dot-green" />
                 </div>
+                <div className="nc-browser-url">audit.netcradus.in/new-scan</div>
+              </div>
+              <img 
+                src={newScanImg} 
+                alt="NETCRAD Vulnerability Assessment New Scan Dashboard" 
+                className="nc-dashboard-media"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <div className="audit-card-body">
-                  <div className="audit-item pass">
-                    <CheckCircle2 size={16} className="text-green" />
-                    <div className="audit-item-text">
-                      <strong>SSL / TLS Cryptographic Hygiene</strong>
-                      <span>TLS 1.3 enforced • RSA-2048 key • HSTS active</span>
-                    </div>
-                    <span className="audit-badge-pass">PASS</span>
-                  </div>
+      {/* =========================================================================
+          SECURITY CAPABILITY STRIP
+          ========================================================================= */}
+      <section className="nc-capability-strip-section">
+        <div className="nc-container">
+          <div className="nc-capability-strip">
+            <div className="nc-strip-item">
+              <div className="nc-strip-icon-wrap">
+                <Radio size={18} />
+              </div>
+              <div className="nc-strip-text">
+                <strong>PORTS</strong>
+                <span>Open services detection</span>
+              </div>
+            </div>
 
-                  <div className="audit-item pass">
-                    <CheckCircle2 size={16} className="text-green" />
-                    <div className="audit-item-text">
-                      <strong>HTTP Security Headers</strong>
-                      <span>CSP, X-Frame-Options, Permissions-Policy configured</span>
-                    </div>
-                    <span className="audit-badge-pass">PASS</span>
-                  </div>
+            <div className="nc-strip-item">
+              <div className="nc-strip-icon-wrap">
+                <FileCode size={18} />
+              </div>
+              <div className="nc-strip-text">
+                <strong>HEADERS</strong>
+                <span>Security header analysis</span>
+              </div>
+            </div>
 
-                  <div className="audit-item pass">
-                    <CheckCircle2 size={16} className="text-green" />
-                    <div className="audit-item-text">
-                      <strong>OWASP SQLi & XSS Injection Sweep</strong>
-                      <span>Zero reflected, stored, or DOM-based injection points</span>
-                    </div>
-                    <span className="audit-badge-pass">SECURE</span>
-                  </div>
+            <div className="nc-strip-item">
+              <div className="nc-strip-icon-wrap">
+                <Lock size={18} />
+              </div>
+              <div className="nc-strip-text">
+                <strong>SSL / TLS</strong>
+                <span>Certificate &amp; protocol checks</span>
+              </div>
+            </div>
 
-                  <div className="audit-item warn">
-                    <AlertTriangle size={16} className="text-orange" />
-                    <div className="audit-item-text">
-                      <strong>Cookie Security Flags</strong>
-                      <span>SameSite=Lax set, verify Strict on auth session cookies</span>
-                    </div>
-                    <span className="audit-badge-warn">WARN</span>
-                  </div>
+            <div className="nc-strip-item">
+              <div className="nc-strip-icon-wrap">
+                <AlertTriangle size={18} />
+              </div>
+              <div className="nc-strip-text">
+                <strong>OWASP TOP 10</strong>
+                <span>Web application risks</span>
+              </div>
+            </div>
 
-                  <div className="audit-item pass">
-                    <CheckCircle2 size={16} className="text-green" />
-                    <div className="audit-item-text">
-                      <strong>Information Leakage & Config Probing</strong>
-                      <span>No public .env, .git, or debug endpoints exposed</span>
-                    </div>
-                    <span className="audit-badge-pass">CLEAN</span>
-                  </div>
-                </div>
+            <div className="nc-strip-item">
+              <div className="nc-strip-icon-wrap">
+                <Crosshair size={18} />
+              </div>
+              <div className="nc-strip-text">
+                <strong>CVSS SCORING</strong>
+                <span>Industry standard risk rating</span>
+              </div>
+            </div>
 
-                <div className="audit-card-footer">
-                  <span>Netcrad Automated Intelligence Engine</span>
-                  <span className="font-mono text-orange">100% Comprehensive</span>
-                </div>
+            <div className="nc-strip-item">
+              <div className="nc-strip-icon-wrap">
+                <FileText size={18} />
+              </div>
+              <div className="nc-strip-text">
+                <strong>DETAILED REPORTS</strong>
+                <span>Actionable security results</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6 Core Capabilities */}
-      <section className="section-py cyber-grid-subtle">
-        <div className="container">
-          <SectionHeader
-            badge="POWERFUL CAPABILITIES"
-            title="Comprehensive Website Security"
-            highlightText="Intelligence & Auditing"
-            subtitle="Discover, risk-score, remediate, and continuously track public-facing website exposures."
-          />
+      {/* =========================================================================
+          SECTION 2: HOW NETCRAD WORKS (5-STEP CONNECTED WORKFLOW)
+          ========================================================================= */}
+      <section className="nc-works-section" id="how-it-works">
+        <div className="nc-ambient-glow nc-glow-works" />
+        <div className="nc-container">
+          <div className="nc-section-header text-center">
+            <h2 className="nc-section-title">
+              How <span className="nc-text-orange">NETCRAD</span> Works
+            </h2>
+            <p className="nc-section-sub" style={{ margin: '0 auto' }}>
+              From scan to actionable insights — in minutes.
+            </p>
+          </div>
 
-          <div className="grid-3 netcrad-caps-grid">
-            {auditCapabilities.map((cap, idx) => {
-              const Icon = cap.icon;
-              return (
-                <div key={idx} className="glass-card netcrad-cap-card">
-                  <div className="cap-icon-box">
-                    <Icon size={24} />
-                  </div>
-                  <h3 className="cap-title">{cap.title}</h3>
-                  <p className="cap-desc">{cap.desc}</p>
+          <div className="nc-workflow-flow">
+            {/* Step 1 */}
+            <div className="nc-flow-card">
+              <div className="nc-step-node-badge">
+                <div className="nc-step-icon-circle">
+                  <Terminal size={18} />
                 </div>
-              );
-            })}
+                <span className="nc-step-number">1</span>
+              </div>
+              <div className="nc-flow-details">
+                <h3 className="nc-flow-step-title">Enter Target</h3>
+                <p className="nc-flow-step-desc">Provide the website or authorized target.</p>
+              </div>
+            </div>
+
+            <div className="nc-flow-connector-line" />
+
+            {/* Step 2 */}
+            <div className="nc-flow-card">
+              <div className="nc-step-node-badge">
+                <div className="nc-step-icon-circle">
+                  <Zap size={18} />
+                </div>
+                <span className="nc-step-number">2</span>
+              </div>
+              <div className="nc-flow-details">
+                <h3 className="nc-flow-step-title">Scan</h3>
+                <p className="nc-flow-step-desc">NETCRAD checks ports, headers, SSL, OWASP and more.</p>
+              </div>
+            </div>
+
+            <div className="nc-flow-connector-line" />
+
+            {/* Step 3 */}
+            <div className="nc-flow-card">
+              <div className="nc-step-node-badge">
+                <div className="nc-step-icon-circle">
+                  <BarChart3 size={18} />
+                </div>
+                <span className="nc-step-number">3</span>
+              </div>
+              <div className="nc-flow-details">
+                <h3 className="nc-flow-step-title">Analyze</h3>
+                <p className="nc-flow-step-desc">Findings are categorized and risk scored (CVSS).</p>
+              </div>
+            </div>
+
+            <div className="nc-flow-connector-line" />
+
+            {/* Step 4 */}
+            <div className="nc-flow-card">
+              <div className="nc-step-node-badge">
+                <div className="nc-step-icon-circle">
+                  <ShieldCheck size={18} />
+                </div>
+                <span className="nc-step-number">4</span>
+              </div>
+              <div className="nc-flow-details">
+                <h3 className="nc-flow-step-title">Get Results</h3>
+                <p className="nc-flow-step-desc">Review vulnerabilities and supporting details.</p>
+              </div>
+            </div>
+
+            <div className="nc-flow-connector-line" />
+
+            {/* Step 5 */}
+            <div className="nc-flow-card">
+              <div className="nc-step-node-badge">
+                <div className="nc-step-icon-circle">
+                  <CheckCircle2 size={18} />
+                </div>
+                <span className="nc-step-number">5</span>
+              </div>
+              <div className="nc-flow-details">
+                <h3 className="nc-flow-step-title">Take Action</h3>
+                <p className="nc-flow-step-desc">Use findings to guide remediation.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Detailed Audit Categories */}
-      <section className="section-py" id="categories">
-        <div className="container">
-          <SectionHeader
-            badge="FULL-SPECTRUM SCANNING"
-            title="What NetCrad Inspects on"
-            highlightText="Your Digital Perimeter"
-            subtitle="Deep non-intrusive security checks across application code, protocols, and infrastructure."
-          />
+      {/* =========================================================================
+          SECTION 3: LIVE SCAN INTELLIGENCE
+          ========================================================================= */}
+      <section className="nc-live-scan-section">
+        <div className="nc-ambient-glow nc-glow-live" />
+        <div className="nc-container nc-split-grid">
+          {/* Left Narrative */}
+          <div className="nc-split-left-col">
+            <div className="nc-eyebrow">
+              <span className="nc-eyebrow-dot" />
+              REAL-TIME SECURITY ANALYSIS
+            </div>
 
-          <div className="netcrad-categories-stack">
-            {auditCategories.map((cat, idx) => (
-              <div key={idx} className="glass-card netcrad-cat-card">
-                <div className="cat-card-header">
-                  <span className="cat-badge">{cat.badge}</span>
-                  <span className="cat-category-label">{cat.category}</span>
+            <h2 className="nc-section-title">
+              Live Scan <span className="nc-text-orange">Intelligence</span>
+            </h2>
+
+            <p className="nc-split-desc">
+              Watch NETCRAD analyze your target in real-time. Our multi-layered scanning engine checks for open ports, security headers, SSL/TLS issues, OWASP vulnerabilities and more.
+            </p>
+
+            <ul className="nc-feature-checklist">
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
                 </div>
-                <h3 className="cat-title">{cat.title}</h3>
-                <p className="cat-desc">{cat.description}</p>
+                <span>Port scanning (Nmap 1-1024)</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>Security header analysis (CSP, HSTS, X-Frame)</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>SSL / TLS certificate &amp; cipher audit</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>OWASP security checks &amp; passive alerts</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>Real-time CVSS risk scoring</span>
+              </li>
+            </ul>
+          </div>
 
-                <div className="cat-checks-grid">
-                  {cat.checks.map((check, cIdx) => (
-                    <div key={cIdx} className="cat-check-item">
-                      <CheckCircle2 size={16} className="text-orange" />
-                      <span>{check}</span>
-                    </div>
-                  ))}
+          {/* Right: Real "Scan in Progress" Screenshot */}
+          <div className="nc-split-right-col">
+            <div className="nc-dashboard-frame">
+              <div className="nc-frame-glow-aura" />
+              <div className="nc-browser-bar">
+                <div className="nc-browser-dots">
+                  <span className="nc-dot-red" />
+                  <span className="nc-dot-yellow" />
+                  <span className="nc-dot-green" />
+                </div>
+                <div className="nc-browser-url">audit.netcradus.in/scan-in-progress</div>
+              </div>
+              <img 
+                src={scanProgressImg} 
+                alt="NETCRAD Live Security Scan In Progress" 
+                className="nc-dashboard-media"
+                loading="lazy"
+              />
+
+              {/* Actionable Badge Overlay */}
+              <div className="nc-accent-badge-box">
+                <Zap size={18} className="nc-accent-badge-icon" />
+                <div className="nc-accent-badge-text">
+                  FAST. <br />
+                  ACCURATE. <br />
+                  ACTIONABLE.
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How NetCrad Works */}
-      <section className="section-py cyber-grid-subtle" id="how-it-works">
-        <div className="container">
-          <SectionHeader
-            badge="4-STEP WORKFLOW"
-            title="How NetCrad Auditing"
-            highlightText="Works End-to-End"
-            subtitle="From single URL input to comprehensive developer remediation guidance in minutes."
-          />
+      {/* =========================================================================
+          SECTION 4: RESULTS (TURN FINDINGS INTO DECISIONS)
+          ========================================================================= */}
+      <section className="nc-results-section">
+        <div className="nc-ambient-glow nc-glow-results" />
+        <div className="nc-container nc-split-grid">
+          {/* Left: Results Capabilities (Compact Cardless Layout) */}
+          <div className="nc-split-left-col">
+            <div className="nc-eyebrow">
+              <span className="nc-eyebrow-dot" />
+              CLEAR INSIGHTS. HIGHER SECURITY
+            </div>
 
-          <div className="grid-4 netcrad-steps-grid">
-            {scanSteps.map((step) => (
-              <div key={step.step} className="glass-card netcrad-step-card">
-                <span className="step-num-pill">{step.step}</span>
-                <h4 className="step-card-title">{step.title}</h4>
-                <p className="step-card-desc">{step.desc}</p>
+            <h2 className="nc-section-title">
+              Turn Findings Into <span className="nc-text-orange">Decisions</span>
+            </h2>
+
+            <p className="nc-split-desc">
+              NETCRAD organizes security findings so teams can understand severity and prioritize remediation.
+            </p>
+
+            <div className="nc-results-cardless-list">
+              <div className="nc-res-row">
+                <div className="nc-res-icon-wrap">
+                  <ShieldCheck size={18} />
+                </div>
+                <div className="nc-res-text">
+                  <strong>Site security grade</strong>
+                  <span>Holistic executive rating (A–F)</span>
+                </div>
               </div>
-            ))}
+
+              <div className="nc-res-row">
+                <div className="nc-res-icon-wrap">
+                  <BarChart3 size={18} />
+                </div>
+                <div className="nc-res-text">
+                  <strong>CVSS average score</strong>
+                  <span>Standardized vulnerability rating</span>
+                </div>
+              </div>
+
+              <div className="nc-res-row">
+                <div className="nc-res-icon-wrap">
+                  <Layers size={18} />
+                </div>
+                <div className="nc-res-text">
+                  <strong>Detailed vulnerability findings</strong>
+                  <span>Contextual evidence &amp; mapped CWEs</span>
+                </div>
+              </div>
+
+              <div className="nc-res-row">
+                <div className="nc-res-icon-wrap">
+                  <Filter size={18} />
+                </div>
+                <div className="nc-res-text">
+                  <strong>Severity filtering</strong>
+                  <span>Filter by Critical, High, Medium, Low</span>
+                </div>
+              </div>
+
+              <div className="nc-res-row">
+                <div className="nc-res-icon-wrap">
+                  <Download size={18} />
+                </div>
+                <div className="nc-res-text">
+                  <strong>Downloadable security report</strong>
+                  <span>Actionable audit-ready documentation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Real "Results" Screenshot */}
+          <div className="nc-split-right-col">
+            <div className="nc-dashboard-frame">
+              <div className="nc-frame-glow-aura" />
+              <div className="nc-browser-bar">
+                <div className="nc-browser-dots">
+                  <span className="nc-dot-red" />
+                  <span className="nc-dot-yellow" />
+                  <span className="nc-dot-green" />
+                </div>
+                <div className="nc-browser-url">audit.netcradus.in/results</div>
+              </div>
+              <img 
+                src={resultsImg} 
+                alt="NETCRAD Vulnerability Assessment Results Dashboard" 
+                className="nc-dashboard-media"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <CTASection
-        title="Audit and Harden Your Website with"
-        highlightText="NetCrad Intelligence"
-        subtitle="Schedule a comprehensive vulnerability assessment with our application security engineers."
-      />
+      {/* =========================================================================
+          SECTION 5: SECURITY PRIORITIZATION
+          ========================================================================= */}
+      <section className="nc-prioritization-section">
+        <div className="nc-container">
+          <div className="nc-section-header text-center">
+            <div className="nc-eyebrow" style={{ justifyContent: 'center' }}>
+              <span className="nc-eyebrow-dot" />
+              RISK-BASED REMEDIATION
+            </div>
+            <h2 className="nc-section-title">
+              Know What Matters <span className="nc-text-orange">First</span>
+            </h2>
+            <p className="nc-section-sub" style={{ margin: '0 auto' }}>
+              NETCRAD organizes detected findings by severity and risk information so security teams can focus on higher-priority issues first.
+            </p>
+          </div>
+
+          {/* Severity Risk Spectrum Display */}
+          <div className="nc-severity-spectrum">
+            <div className="nc-spectrum-card nc-sev-critical">
+              <div className="nc-sev-badge">CRITICAL</div>
+              <div className="nc-sev-cvss">CVSS 9.0 – 10.0</div>
+              <p className="nc-sev-desc">Immediate exploitable exposures requiring urgent same-day mitigation.</p>
+            </div>
+
+            <div className="nc-spectrum-card nc-sev-high">
+              <div className="nc-sev-badge">HIGH</div>
+              <div className="nc-sev-cvss">CVSS 7.0 – 8.9</div>
+              <p className="nc-sev-desc">Significant security weaknesses that could enable direct privilege escalation or data loss.</p>
+            </div>
+
+            <div className="nc-spectrum-card nc-sev-medium">
+              <div className="nc-sev-badge">MEDIUM</div>
+              <div className="nc-sev-cvss">CVSS 4.0 – 6.9</div>
+              <p className="nc-sev-desc">Configuration flaws and missing defense-in-depth headers requiring planned remediation.</p>
+            </div>
+
+            <div className="nc-spectrum-card nc-sev-low">
+              <div className="nc-sev-badge">LOW / INFO</div>
+              <div className="nc-sev-cvss">CVSS 0.1 – 3.9</div>
+              <p className="nc-sev-desc">Informational findings and best practice hardening recommendations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 6: SCAN HISTORY (TRACK YOUR ASSESSMENTS)
+          ========================================================================= */}
+      <section className="nc-history-section">
+        <div className="nc-ambient-glow nc-glow-history" />
+        <div className="nc-container nc-split-grid">
+          {/* Left Narrative */}
+          <div className="nc-split-left-col">
+            <div className="nc-eyebrow">
+              <span className="nc-eyebrow-dot" />
+              SECURITY VISIBILITY OVER TIME
+            </div>
+
+            <h2 className="nc-section-title">
+              Track Your <span className="nc-text-orange">Assessments</span>
+            </h2>
+
+            <p className="nc-split-desc">
+              NETCRAD maintains scan history so teams can review previous assessments and compare security results over time.
+            </p>
+
+            <ul className="nc-feature-checklist">
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>Review previous scans</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>Compare security grades</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>Review finding counts</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>Check assessment dates</span>
+              </li>
+              <li>
+                <div className="nc-chk-badge">
+                  <Check size={14} className="nc-chk-icon" />
+                </div>
+                <span>Re-run security assessments</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Right: Real "Scan History" Screenshot */}
+          <div className="nc-split-right-col">
+            <div className="nc-dashboard-frame">
+              <div className="nc-frame-glow-aura" />
+              <div className="nc-browser-bar">
+                <div className="nc-browser-dots">
+                  <span className="nc-dot-red" />
+                  <span className="nc-dot-yellow" />
+                  <span className="nc-dot-green" />
+                </div>
+                <div className="nc-browser-url">audit.netcradus.in/history</div>
+              </div>
+              <img 
+                src={scanHistoryImg} 
+                alt="NETCRAD Scan History and Assessment Tracking" 
+                className="nc-dashboard-media"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 7: PRODUCT WORKFLOW PIPELINE
+          ========================================================================= */}
+      <section className="nc-pipeline-section">
+        <div className="nc-container">
+          <div className="nc-section-header text-center">
+            <div className="nc-eyebrow" style={{ justifyContent: 'center' }}>
+              <span className="nc-eyebrow-dot" />
+              END-TO-END SECURITY LIFECYCLE
+            </div>
+            <h2 className="nc-section-title">
+              Complete Assessment <span className="nc-text-orange">Pipeline</span>
+            </h2>
+            <p className="nc-section-sub" style={{ margin: '0 auto' }}>
+              From security assessment to remediation and re-assessment.
+            </p>
+          </div>
+
+          <div className="nc-pipeline-wrapper">
+            <div className="nc-pipeline-node">
+              <span className="nc-pipe-label">TARGET</span>
+            </div>
+            <div className="nc-pipe-arrow">→</div>
+            
+            <div className="nc-pipeline-node">
+              <span className="nc-pipe-label">SCAN</span>
+            </div>
+            <div className="nc-pipe-arrow">→</div>
+
+            <div className="nc-pipeline-node">
+              <span className="nc-pipe-label">DETECT</span>
+            </div>
+            <div className="nc-pipe-arrow">→</div>
+
+            <div className="nc-pipeline-node">
+              <span className="nc-pipe-label">ANALYZE</span>
+            </div>
+            <div className="nc-pipe-arrow">→</div>
+
+            <div className="nc-pipeline-node">
+              <span className="nc-pipe-label">PRIORITIZE</span>
+            </div>
+            <div className="nc-pipe-arrow">→</div>
+
+            <div className="nc-pipeline-node">
+              <span className="nc-pipe-label">REPORT</span>
+            </div>
+            <div className="nc-pipe-arrow">→</div>
+
+            <div className="nc-pipeline-node">
+              <span className="nc-pipe-label">REMEDIATE</span>
+            </div>
+            <div className="nc-pipe-arrow">→</div>
+
+            <div className="nc-pipeline-node nc-pipe-final">
+              <span className="nc-pipe-label">RE-SCAN</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 8: BUILT FOR SECURITY-FOCUSED TEAMS
+          ========================================================================= */}
+      <section className="nc-teams-section">
+        <div className="nc-container">
+          <div className="nc-section-header text-center">
+            <div className="nc-eyebrow" style={{ justifyContent: 'center' }}>
+              <span className="nc-eyebrow-dot" />
+              TRUSTED BY MODERN ORGANIZATIONS
+            </div>
+            <h2 className="nc-section-title">
+              Built for Security-Focused <span className="nc-text-orange">Teams</span>
+            </h2>
+          </div>
+
+          <div className="nc-teams-strip">
+            <div className="nc-team-item">
+              <div className="nc-team-icon-wrap">
+                <Shield size={20} />
+              </div>
+              <div className="nc-team-text">
+                <strong>Security Teams</strong>
+                <span>Proactive risk management</span>
+              </div>
+            </div>
+
+            <div className="nc-team-item">
+              <div className="nc-team-icon-wrap">
+                <Server size={20} />
+              </div>
+              <div className="nc-team-text">
+                <strong>IT &amp; Infrastructure</strong>
+                <span>Secure your digital assets</span>
+              </div>
+            </div>
+
+            <div className="nc-team-item">
+              <div className="nc-team-icon-wrap">
+                <Code size={20} />
+              </div>
+              <div className="nc-team-text">
+                <strong>DevSecOps</strong>
+                <span>Integrate into your SDLC</span>
+              </div>
+            </div>
+
+            <div className="nc-team-item">
+              <div className="nc-team-icon-wrap">
+                <Activity size={20} />
+              </div>
+              <div className="nc-team-text">
+                <strong>SOC Teams</strong>
+                <span>Enhance threat detection</span>
+              </div>
+            </div>
+
+            <div className="nc-team-item">
+              <div className="nc-team-icon-wrap">
+                <Users size={20} />
+              </div>
+              <div className="nc-team-text">
+                <strong>Compliance Teams</strong>
+                <span>Meet regulatory requirements</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 9: FINAL CTA
+          ========================================================================= */}
+      <section className="nc-final-cta-section">
+        <div className="nc-cta-backdrop-layer">
+          <img 
+            src={ctaHorizonImg} 
+            alt="Cybersecurity sunrise horizon landscape" 
+            className="nc-cta-horizon-img"
+            loading="lazy"
+          />
+          <div className="nc-cta-horizon-mask" />
+        </div>
+
+        <div className="nc-container nc-final-cta-inner">
+          <div className="nc-cta-headline-block">
+            <div className="nc-cta-eyebrow-text">
+              READY TO ASSESS YOUR SECURITY?
+            </div>
+            
+            <h2 className="nc-cta-main-heading">
+              See What Attackers Could Find <br />
+              <span className="nc-text-orange-glow">Before They Do.</span>
+            </h2>
+
+            <p className="nc-cta-body-text">
+              Use NETCRAD to assess your authorized digital assets and turn security findings into actionable insights.
+            </p>
+
+            <div className="nc-cta-btn-wrap">
+              <Link to="/contact" className="nc-btn-primary nc-btn-cta-glow">
+                START SECURITY ASSESSMENT
+                <ArrowRight size={18} className="nc-btn-icon" />
+              </Link>
+              <Link to="/contact" className="nc-btn-ghost nc-btn-cta-ghost">
+                REQUEST A DEMO
+              </Link>
+            </div>
+          </div>
+
+          {/* Integrated Tagline Crest on Right */}
+          <div className="nc-cta-crest-block">
+            <div className="nc-cta-crest-labels">
+              <span>SECURITY</span>
+              <span>FUELS</span>
+              <strong>PROGRESS</strong>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
