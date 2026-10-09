@@ -411,7 +411,7 @@ export default function Footer() {
 
           {/* Legal Navigation Links */}
           <div className="footer-bottom-center">
-            <Link to="/about#privacy" className="bottom-legal-link">Privacy Policy</Link>
+            <Link to="/privacy-policy" className="bottom-legal-link">Privacy Policy</Link>
             <span className="bottom-divider" aria-hidden="true">|</span>
             <Link to="/about#terms" className="bottom-legal-link">Terms of Service</Link>
             <span className="bottom-divider" aria-hidden="true">|</span>

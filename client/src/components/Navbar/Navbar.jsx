@@ -6,7 +6,6 @@ import {
   ChevronUp,
   Menu, 
   X, 
-  PhoneCall, 
   ArrowRight, 
   Cpu, 
   Crosshair, 
@@ -239,22 +238,6 @@ export default function Navbar() {
 
   return (
     <header className={`navbar-header ${scrolled ? 'navbar-scrolled' : ''}`}>
-      {/* Top Contact Bar */}
-      <div className="navbar-top-bar">
-        <div className="container flex-end">
-          <div className="top-bar-actions">
-            <a href={`tel:${companyInfo.contact.tollFree.replace(/\s+/g, '')}`} className="top-bar-link" aria-label={`Call Toll Free ${companyInfo.contact.tollFree}`}>
-              <PhoneCall size={12} className="top-icon" />
-              <span>Toll-Free: {companyInfo.contact.tollFree}</span>
-            </a>
-            <span className="top-bar-divider" aria-hidden="true">|</span>
-            <a href={`mailto:${companyInfo.contact.email}`} className="top-bar-link" aria-label={`Email ${companyInfo.contact.email}`}>
-              <span>{companyInfo.contact.email}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
       <nav className="navbar-main" aria-label="Main Navigation">
         <div className="container flex-between">
           {/* Brand Logo - Clicking navigates to Home */}

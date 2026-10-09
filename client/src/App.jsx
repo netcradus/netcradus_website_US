@@ -16,6 +16,7 @@ import NetXDR from './pages/NetXDR';
 import ProductDetail from './pages/ProductDetail';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
 
 import './styles/index.css';
@@ -69,6 +70,10 @@ export default function App() {
             <Route path="/crm" element={<CRM />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/policies" element={<PrivacyPolicy />} />
+            <Route path="/compliance" element={<PrivacyPolicy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
