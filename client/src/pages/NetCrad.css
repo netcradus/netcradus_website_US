@@ -210,6 +210,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
 }
 
 .nc-hero-grid {
@@ -875,7 +876,7 @@
   position: relative;
   padding: clamp(4.5rem, 6vw, 5.75rem) 0;
   background: #03050C;
-  overflow: visible;
+  overflow: hidden;
   border-top: 1px solid rgba(255, 122, 0, 0.2);
 }
 

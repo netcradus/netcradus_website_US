@@ -123,37 +123,24 @@
 .service-card-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.service-sla-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: var(--font-mono);
-  font-size: 0.725rem;
-  font-weight: 600;
-  color: var(--brand-orange);
-}
-
-.sla-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--brand-orange);
-  box-shadow: 0 0 6px var(--brand-orange);
+  width: 100%;
 }
 
 .service-learn-more {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
   font-size: 0.825rem;
   font-weight: 600;
   color: #FFFFFF;
+  text-decoration: none;
+  margin: 0;
+  margin-right: auto;
+  transition: color 0.25s ease;
 }
 
 .service-learn-more .arrow-icon {

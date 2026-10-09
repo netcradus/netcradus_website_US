@@ -53,8 +53,9 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-left: clamp(2rem, 10vw, 14rem);
-  padding-right: clamp(1rem, 2vw, 3rem);
+  padding-left: clamp(1rem, 4vw, 3rem);
+  padding-right: clamp(1rem, 4vw, 3rem);
+  box-sizing: border-box;
 }
 
 .contact-hero-text-wrap {
@@ -510,19 +511,6 @@
 .channel-sub-info {
   font-size: 0.8rem;
   color: #94A3B8;
-}
-
-.toll-free-pill {
-  margin-top: 0.45rem;
-  font-size: 0.825rem;
-  color: #94A3B8;
-}
-
-.toll-free-pill a {
-  color: #FF7900;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  text-decoration: none;
 }
 
 .email-sub-item {
@@ -1023,9 +1011,16 @@
   .form-row-2 {
     grid-template-columns: 1fr;
   }
-  .contact-form-card,
-  .direct-desk-card {
-    padding: 1.75rem 1.25rem;
+  .contact-form-card-light,
+  .direct-desk-card-dark {
+    padding: 1.5rem 1.15rem;
+  }
+  .channel-val-primary {
+    font-size: 1.15rem;
+    word-break: break-all;
+  }
+  .email-val {
+    word-break: break-all;
   }
   .faq-still-have-questions {
     flex-direction: column;
@@ -1037,5 +1032,18 @@
   }
   .hero-trust-badge {
     justify-content: center;
+  }
+  .cta-btn-group {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .cta-btn-group > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .contact-cta-card {
+    padding: 2.5rem 1.25rem;
   }
 }

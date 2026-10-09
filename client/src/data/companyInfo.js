@@ -29,7 +29,6 @@ export const companyInfo = {
       postalCode: "201003",
       country: "India",
       fullAddress: "Office no. 609, 6th floor, AVS CITY SQUARE, Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003, India",
-      tollFree: "1800 121 008800",
       phone: "+91 72909 09571",
       email: "info@netcradus.com",
       hours: "24/7 Global Security Operations"
@@ -50,22 +49,22 @@ export const companyInfo = {
     }
   },
 
-  // Verified contact details from reference website (India HQ defaults for backward-compatibility)
+  // US Website Contact Details
   contact: {
     email: "info@netcradus.com",
-    tollFree: "1800 121 008800",
-    phone: "+91 72909 09571",
+    hrEmail: "hr@netcradus.com",
+    careersEmail: "hr@netcradus.com",
+    phone: "+1 302 495 2661",
     usaPhone: "+1 302 495 2661",
-    internationalPhone: "+91-1800121008800",
     hours: "24/7 Global Security Operations",
     address: {
-      street: "Office no. 609, 6th floor, AVS CITY SQUARE, Raj Nagar Extension",
-      city: "Ghaziabad",
-      state: "Uttar Pradesh",
-      postalCode: "201003",
-      country: "India"
+      street: "8 The Green, Suite B",
+      city: "Dover",
+      state: "DE",
+      postalCode: "19901",
+      country: "United States"
     },
-    fullAddress: "Office no. 609, 6th floor, AVS CITY SQUARE, Raj Nagar Extension, Ghaziabad, Uttar Pradesh 201003, India"
+    fullAddress: "8 The Green, Suite B, Dover, DE 19901, United States"
   },
 
   socials: {

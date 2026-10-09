@@ -156,7 +156,7 @@
 @media (max-width: 768px) {
   .cyber-hero-section {
     min-height: auto;
-    padding: 3rem 0 2.5rem;
+    padding: 3rem 0 2rem;
   }
   .hero-video-overlay {
     background: linear-gradient(
@@ -168,5 +168,35 @@
   }
   .hero-bg-video {
     object-position: center 30%;
+  }
+  .hero-headline {
+    font-size: clamp(1.85rem, 5.5vw, 2.75rem);
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .hero-cta-group > * {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-supporting-text {
+    font-size: 0.925rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .cyber-hero-section {
+    padding: 2.25rem 0 1.75rem;
+  }
+  .hero-headline {
+    font-size: 1.65rem;
   }
 }

@@ -933,6 +933,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  width: 100%;
 }
 
 .stage-highlight-pill {
@@ -946,11 +947,35 @@
   font-size: 0.85rem;
   color: var(--text-primary);
   font-weight: 500;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.stage-highlight-pill span {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+  word-break: break-word;
 }
 
 .stage-highlight-pill .highlight-icon {
   color: var(--brand-orange);
   flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .stage-highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .stage-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 }
 
 /* Tier tech badge */
@@ -984,10 +1009,13 @@
   margin: 0 auto clamp(2rem, 3.5vw, 3rem) auto;
   position: relative;
   z-index: 3;
+  padding: 0 0.5rem;
 }
 
 .siem-badge-wrap {
   margin-bottom: 1.15rem;
+  display: flex;
+  justify-content: center;
 }
 
 .siem-engine-badge {
@@ -1004,6 +1032,7 @@
   padding: 0.35rem 0.95rem;
   border-radius: 9999px;
   box-shadow: 0 0 14px rgba(255, 121, 0, 0.15);
+  max-width: 100%;
 }
 
 .engine-badge-dot {
@@ -1013,6 +1042,7 @@
   background: #FF7900;
   box-shadow: 0 0 8px #FF7900;
   animation: engineBadgePulse 1.8s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes engineBadgePulse {
@@ -1021,12 +1051,14 @@
 }
 
 .siem-engine-heading {
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-size: clamp(1.65rem, 3.8vw, 2.75rem);
   font-weight: 800;
   line-height: 1.25;
   color: #FFFFFF;
   margin-bottom: 1.1rem;
   letter-spacing: -0.02em;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .siem-orange-highlight {
@@ -1034,10 +1066,11 @@
   background: linear-gradient(135deg, #FF9D2E 0%, #FF7900 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline;
 }
 
 .siem-engine-subtitle {
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
   color: #94A3B8;
   line-height: 1.7;
   max-width: 780px;
@@ -1095,6 +1128,29 @@
 .zero-trust-cta {
   display: flex;
   justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .zero-trust-banner {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+    gap: 1.75rem;
+  }
+  .zero-trust-cta {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .zero-trust-banner {
+    padding: 1.5rem 1rem;
+  }
+  .zero-trust-cta .btn,
+  .zero-trust-cta a {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 /* Enterprise Use Cases */
@@ -1891,14 +1947,30 @@
 /* Responsive Media Queries */
 @media (max-width: 1024px) {
   .product-ecosystem-card,
-  .future-products-banner {
+  .future-products-banner,
+  .product-spotlight-card,
+  .product-spotlight-card.reverse {
     grid-template-columns: 1fr;
   }
-  .product-matrix-grid {
+  .product-matrix-grid,
+  .acis-why-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .future-cta-col {
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .acis-why-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-spotlight-card {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+  .acis-showcase-box {
+    padding: 1.75rem 1.25rem;
   }
 }
 
@@ -1908,6 +1980,28 @@
   }
   .product-ecosystem-card {
     padding: 24px 20px;
+  }
+  .acis-cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .acis-cta-buttons > * {
+    width: 100%;
+    text-align: center;
+  }
+  .future-products-banner {
+    padding: 24px 18px;
+  }
+  .spotlight-stat-box {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .spotlight-stat-box {
+    grid-template-columns: 1fr;
   }
 }
 

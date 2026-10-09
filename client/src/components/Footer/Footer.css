@@ -729,3 +729,26 @@
     white-space: normal;
   }
 }
+
+@media (max-width: 380px) {
+  .footer-feature-chips {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.35rem;
+  }
+
+  .feature-chip {
+    padding: 0.5rem 0.2rem;
+  }
+
+  .chip-label {
+    font-size: 0.62rem;
+  }
+
+  .presence-address {
+    word-break: break-word;
+  }
+
+  .premium-newsletter-card {
+    padding: 1.25rem 1rem;
+  }
+}

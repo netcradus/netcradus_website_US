@@ -7,7 +7,8 @@ import {
   Send, 
   X,
   Info,
-  DollarSign
+  DollarSign,
+  Mail
 } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
 import CTASection from '../components/CTA/CTASection';
@@ -159,6 +160,17 @@ export default function Careers() {
               </div>
             ))}
           </div>
+
+          {/* Direct HR Inquiries Strip */}
+          <div className="openings-footer-note text-center" style={{ marginTop: '2.5rem', color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+            <span>Interested in joining Netcradus? You can also send your CV and portfolio directly to </span>
+            <a 
+              href="mailto:hr@netcradus.com" 
+              style={{ color: 'var(--neon-cyan)', fontWeight: 600, textDecoration: 'underline' }}
+            >
+              hr@netcradus.com
+            </a>
+          </div>
         </div>
       </section>
 
@@ -195,7 +207,16 @@ export default function Careers() {
                 </div>
 
                 <form onSubmit={handleApply} className="modal-application-form">
-                  <h4 className="form-subhead">Submit Candidate Profile:</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                    <h4 className="form-subhead" style={{ margin: 0 }}>Submit Candidate Profile:</h4>
+                    <a 
+                      href={`mailto:hr@netcradus.com?subject=Application%20-%20${encodeURIComponent(selectedRole.title)}`} 
+                      style={{ fontSize: '0.825rem', color: 'var(--neon-cyan)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem', textDecoration: 'none' }}
+                    >
+                      <Mail size={13} />
+                      <span>Or email: hr@netcradus.com</span>
+                    </a>
+                  </div>
                   <div className="form-row-2">
                     <div className="form-field">
                       <label htmlFor="app-name">Full Name *</label>
@@ -228,7 +249,7 @@ export default function Careers() {
                         id="app-phone"
                         type="tel"
                         required
-                        placeholder="+91 98765 43210"
+                        placeholder="+1 (555) 019-2834"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       />
@@ -283,7 +304,7 @@ export default function Careers() {
                   <div className="notice-text-col">
                     <strong>Direct Transmission to Talent Team:</strong>
                     <p style={{ fontSize: '0.85rem', marginTop: '0.25rem', color: 'var(--text-secondary)' }}>
-                      Please forward your resume and profile directly to <a href={`mailto:${companyInfo.contact.email}?subject=Job Application - ${encodeURIComponent(selectedRole.title)}&body=Name: ${encodeURIComponent(formData.fullName)}%0APhone: ${encodeURIComponent(formData.phone)}%0ALinkedIn: ${encodeURIComponent(formData.linkedin)}%0AOverview: ${encodeURIComponent(formData.coverNote)}`} style={{ color: 'var(--neon-cyan)', textDecoration: 'underline' }}>{companyInfo.contact.email}</a> for immediate screening.
+                      Please forward your resume and profile directly to <a href={`mailto:hr@netcradus.com?subject=Job Application - ${encodeURIComponent(selectedRole.title)}&body=Name: ${encodeURIComponent(formData.fullName)}%0APhone: ${encodeURIComponent(formData.phone)}%0ALinkedIn: ${encodeURIComponent(formData.linkedin)}%0AOverview: ${encodeURIComponent(formData.coverNote)}`} style={{ color: 'var(--neon-cyan)', textDecoration: 'underline' }}>hr@netcradus.com</a> for immediate screening.
                     </p>
                   </div>
                 </div>
@@ -301,8 +322,9 @@ export default function Careers() {
       <CTASection
         title="Don't See a Direct Match?"
         highlightText="Submit Your Resume"
-        subtitle={`Forward your profile and research portfolio directly to ${companyInfo.contact.email}.`}
+        subtitle={`Forward your profile and research portfolio directly to ${companyInfo.contact.hrEmail}.`}
         primaryBtnText="Email Talent Acquisition"
+        primaryBtnHref={`mailto:${companyInfo.contact.hrEmail}?subject=General%20Application%20-%20Netcradus%20Talent%20Network`}
       />
     </div>
   );

@@ -379,6 +379,8 @@
 .node-badge-label {
   position: absolute;
   bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-mono, monospace);
   font-size: 0.58rem;
   font-weight: 700;
@@ -479,6 +481,7 @@
   font-size: 0.7rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
+  box-sizing: border-box;
 }
 
 .status-indicator {
@@ -495,6 +498,7 @@
   background: #34D399;
   box-shadow: 0 0 10px #34D399;
   animation: beaconPulse 1.8s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes beaconPulse {
@@ -527,12 +531,153 @@
 .radar-rate {
   color: #34D399;
   font-weight: 600;
+  white-space: nowrap;
 }
 
+/* Responsive Radar Adjustments */
 @media (max-width: 640px) {
+  .threat-radar-wrapper {
+    max-width: 100%;
+  }
+
+  .radar-threat-ticker {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .ticker-content {
+    width: 100%;
+    font-size: 0.68rem;
+    white-space: normal;
+    line-height: 1.35;
+    flex-wrap: wrap;
+  }
+
+  .ticker-time {
+    margin-left: 0;
+  }
+
   .radar-status-bar {
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
     align-items: flex-start;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .status-title {
+    font-size: 0.66rem;
+    line-height: 1.3;
+  }
+
+  .status-right-metrics {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .radar-center-node {
+    width: 72px;
+    height: 72px;
+  }
+
+  .radar-core-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .radar-core-label {
+    font-size: 0.52rem;
+  }
+
+  .radar-core-sub {
+    font-size: 0.42rem;
+  }
+
+  .radar-node {
+    width: 34px;
+    height: 34px;
+  }
+
+  .radar-node svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .node-badge-label {
+    bottom: -15px;
+    font-size: 0.48rem;
+    padding: 0.1rem 0.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Node edge anchoring on mobile to prevent horizontal viewport clipping */
+  .radar-node.node-cloud .node-badge-label {
+    right: -4px;
+    left: auto;
+    transform: none;
+  }
+
+  .radar-node.node-soc .node-badge-label {
+    right: -4px;
+    left: auto;
+    transform: none;
+  }
+
+  .radar-node.node-xdr .node-badge-label {
+    right: -4px;
+    left: auto;
+    transform: none;
+  }
+
+  .radar-node.node-ueba .node-badge-label {
+    left: -4px;
+    transform: none;
+  }
+
+  .radar-node.node-zt .node-badge-label {
+    left: -4px;
+    transform: none;
+  }
+
+  .radar-node.node-siem .node-badge-label {
+    left: -4px;
+    transform: none;
+  }
+
+  .node-tooltip-card {
+    width: 160px;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .radar-center-node {
+    width: 62px;
+    height: 62px;
+  }
+
+  .radar-node {
+    width: 28px;
+    height: 28px;
+  }
+
+  .radar-node svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .node-badge-label {
+    bottom: -13px;
+    font-size: 0.44rem;
+    padding: 0.08rem 0.2rem;
+  }
+
+  .status-title {
+    font-size: 0.6rem;
   }
 }

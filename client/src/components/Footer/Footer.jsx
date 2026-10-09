@@ -289,21 +289,6 @@ export default function Footer() {
             </h4>
 
             <div className="footer-contact-items">
-              {/* Toll-Free IN */}
-              <a
-                href={`tel:${companyInfo.contact.tollFree.replace(/\s+/g, '')}`}
-                className="contact-touch-item"
-                aria-label={`Call Toll Free ${companyInfo.contact.tollFree}`}
-              >
-                <div className="touch-icon-circle">
-                  <Phone size={14} />
-                </div>
-                <div className="touch-text-wrap">
-                  <span className="touch-sub-label">Toll-Free (IN)</span>
-                  <span className="touch-main-text">{companyInfo.contact.tollFree}</span>
-                </div>
-              </a>
-
               {/* US Desk */}
               <a
                 href={`tel:${companyInfo.offices.usa.phoneRaw}`}
@@ -413,7 +398,7 @@ export default function Footer() {
           <div className="footer-bottom-center">
             <Link to="/privacy-policy" className="bottom-legal-link">Privacy Policy</Link>
             <span className="bottom-divider" aria-hidden="true">|</span>
-            <Link to="/about#terms" className="bottom-legal-link">Terms of Service</Link>
+            <Link to="/terms-of-service" className="bottom-legal-link">Terms of Service</Link>
             <span className="bottom-divider" aria-hidden="true">|</span>
             <Link to="/platform" className="bottom-legal-link">Security</Link>
             <span className="bottom-divider" aria-hidden="true">|</span>

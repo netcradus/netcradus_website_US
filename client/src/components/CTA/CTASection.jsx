@@ -10,7 +10,10 @@ export default function CTASection({
   highlightText = "Autonomous Cyber Defense?",
   subtitle = "Engage Netcradus 24/7 Security Operations. Deploy ACIS and secure your hybrid enterprise against modern multi-stage cyber threats.",
   primaryBtnText = "Request Enterprise Security Assessment",
-  secondaryBtnText = `Call 24/7 Desk: ${companyInfo.contact.tollFree}`
+  primaryBtnTo = "/contact",
+  primaryBtnHref,
+  secondaryBtnText = `Call US Desk: ${companyInfo.offices.usa.phone}`,
+  secondaryBtnHref = `tel:${companyInfo.offices.usa.phoneRaw}`
 }) {
   return (
     <section className="cta-section-wrapper">
@@ -46,10 +49,16 @@ export default function CTASection({
           </div>
 
           <div className="cta-buttons-row">
-            <Button to="/contact" variant="primary" size="lg" icon={ArrowRight}>
+            <Button
+              to={primaryBtnHref ? undefined : primaryBtnTo}
+              href={primaryBtnHref}
+              variant="primary"
+              size="lg"
+              icon={ArrowRight}
+            >
               {primaryBtnText}
             </Button>
-            <Button href={`tel:${companyInfo.contact.tollFree.replace(/\s+/g, '')}`} variant="secondary" size="lg" icon={PhoneCall} iconPosition="left">
+            <Button href={secondaryBtnHref} variant="secondary" size="lg" icon={PhoneCall} iconPosition="left">
               {secondaryBtnText}
             </Button>
           </div>

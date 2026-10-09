@@ -413,12 +413,12 @@ export default function About() {
                   onMouseEnter={() => setActiveCap(1)}
                   onMouseLeave={() => setActiveCap(null)}
                 >
+                  <div className="nc-node-icon-circle">
+                    <Radio size={19} />
+                  </div>
                   <div className="nc-node-text">
                     <h3 className="nc-node-title">Security Operations Center (SOC)</h3>
                     <p className="nc-node-desc">Continuous monitoring, detection and response</p>
-                  </div>
-                  <div className="nc-node-icon-circle">
-                    <Radio size={19} />
                   </div>
                 </div>
 
@@ -428,12 +428,12 @@ export default function About() {
                   onMouseEnter={() => setActiveCap(2)}
                   onMouseLeave={() => setActiveCap(null)}
                 >
+                  <div className="nc-node-icon-circle">
+                    <Crosshair size={19} />
+                  </div>
                   <div className="nc-node-text">
                     <h3 className="nc-node-title">Vulnerability Assessment &amp; Penetration Testing (VAPT)</h3>
                     <p className="nc-node-desc">Find and fix risks before attackers do</p>
-                  </div>
-                  <div className="nc-node-icon-circle">
-                    <Crosshair size={19} />
                   </div>
                 </div>
 
@@ -443,12 +443,12 @@ export default function About() {
                   onMouseEnter={() => setActiveCap(3)}
                   onMouseLeave={() => setActiveCap(null)}
                 >
+                  <div className="nc-node-icon-circle">
+                    <Cloud size={19} />
+                  </div>
                   <div className="nc-node-text">
                     <h3 className="nc-node-title">Cloud &amp; Container Defense</h3>
                     <p className="nc-node-desc">Secure multi-cloud and modern infrastructure</p>
-                  </div>
-                  <div className="nc-node-icon-circle">
-                    <Cloud size={19} />
                   </div>
                 </div>
               </div>

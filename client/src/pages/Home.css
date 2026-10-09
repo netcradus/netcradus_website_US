@@ -276,7 +276,7 @@
 
 .case-studies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
@@ -507,9 +507,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  min-width: 120px;
-  max-width: 145px;
+  height: 44px;
+  min-width: 115px;
+  max-width: 135px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
@@ -531,13 +531,39 @@
   justify-content: center;
   border-radius: 7px;
   box-sizing: border-box;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .client-logo-img {
   max-width: 100%;
-  max-height: 36px;
+  max-height: 32px;
+  width: auto;
+  height: auto;
   object-fit: contain;
+  object-position: center;
   display: block;
+  margin: 0 auto;
+}
+
+.client-logo-wrapper.client-logo-online-pantry,
+.client-logo-wrapper.client-logo-vastraalane,
+.client-logo-wrapper.client-logo-oouraa,
+.client-logo-wrapper.client-logo-cyberhaxs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.client-logo-wrapper.client-logo-online-pantry .client-logo-img,
+.client-logo-wrapper.client-logo-vastraalane .client-logo-img,
+.client-logo-wrapper.client-logo-oouraa .client-logo-img,
+.client-logo-wrapper.client-logo-cyberhaxs .client-logo-img {
+  margin: 0 auto;
+  display: block;
+  object-fit: contain;
+  object-position: center;
 }
 
 .client-logo-fallback {
@@ -566,9 +592,22 @@
   }
   .acis-showcase-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
   .testimonials-2col-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .acis-showcase-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .acis-glow-bg {
+    width: 320px;
+    height: 320px;
+    left: 10%;
   }
 }
 
@@ -577,6 +616,66 @@
     grid-template-columns: 1fr;
   }
   .platform-tier-details {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+  .platform-tier-tab {
+    min-width: 180px;
+    padding: 0.85rem 1rem;
+  }
+  .acis-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .acis-cta-row > * {
+    width: 100%;
+    text-align: center;
+  }
+  .tier-action-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .tier-action-row > * {
+    width: 100%;
+    text-align: center;
+  }
+  .acis-highlight-item {
+    padding: 1rem 0.85rem;
+  }
+  .testimonial-card {
+    padding: 1.5rem 1.25rem;
+  }
+  .testimonial-author-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .testimonial-logo-badge {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .view-all-services-bar {
+    margin-top: 2rem !important;
+  }
+  .view-all-services-bar .cyber-btn {
+    width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 380px) {
+  .acis-main-heading {
+    font-size: 1.65rem;
+  }
+  .highlight-icon-box {
+    width: 34px;
+    height: 34px;
+  }
+  .trust-card {
+    padding: 1.5rem 1.15rem;
   }
 }

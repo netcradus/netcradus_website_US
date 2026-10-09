@@ -787,7 +787,6 @@ export default function Navbar() {
                 <ArrowRight size={15} />
               </Link>
               <div className="mobile-contact-info">
-                <p>Toll-Free: <strong>{companyInfo.contact.tollFree}</strong></p>
                 <p>US Desk: <strong>{companyInfo.offices.usa.phone}</strong></p>
                 <p>Email: <strong>{companyInfo.contact.email}</strong></p>
               </div>

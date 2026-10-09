@@ -14,7 +14,9 @@
   position: relative;
   overflow: hidden;
   white-space: nowrap;
-  line-height: 1;
+  line-height: 1.2;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .cyber-btn:disabled {
@@ -110,6 +112,7 @@
   display: inline-flex;
   align-items: center;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .cyber-btn:hover .cyber-btn-icon.right {
@@ -118,4 +121,19 @@
 
 .cyber-btn:hover .cyber-btn-icon.left {
   transform: translateX(-3px);
+}
+
+@media (max-width: 600px) {
+  .cyber-btn {
+    white-space: normal;
+    text-align: center;
+  }
+  .cyber-btn-lg {
+    padding: 0.85rem 1.35rem;
+    font-size: 0.95rem;
+  }
+  .cyber-btn-md {
+    padding: 0.7rem 1.15rem;
+    font-size: 0.875rem;
+  }
 }

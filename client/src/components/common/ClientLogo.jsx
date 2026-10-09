@@ -9,13 +9,13 @@ const logoMap = {
     src: vastraalaneImg,
     alt: 'Vastraalane Logo',
     bg: '#FFFFFF',
-    padding: '3px 8px'
+    padding: '4px 12px'
   },
   'oouraa': {
     src: oouraaImg,
     alt: 'OOURAA Logo',
     bg: '#000000',
-    padding: '4px 10px'
+    padding: '4px 12px'
   },
   'cyberhaxs': {
     src: cyberhaxsImg,
@@ -27,7 +27,7 @@ const logoMap = {
     src: onlinePantryImg,
     alt: 'Online Pantry Logo',
     bg: '#FFFFFF',
-    padding: '3px 8px'
+    padding: '4px 12px'
   }
 };
 
@@ -37,7 +37,7 @@ export default function ClientLogo({ logoKey, company, className = '' }) {
   if (item && item.src) {
     return (
       <div 
-        className={`client-logo-wrapper ${className}`} 
+        className={`client-logo-wrapper client-logo-${logoKey} ${className}`} 
         style={{ 
           backgroundColor: item.bg,
           padding: item.padding

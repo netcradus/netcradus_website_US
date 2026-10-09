@@ -778,3 +778,31 @@
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 600px) {
+  .crm-hero {
+    padding: 7rem 0 3.5rem;
+  }
+  .crm-section {
+    padding: 3.5rem 0;
+  }
+  .crm-hero-buttons,
+  .final-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .crm-hero-buttons > *,
+  .final-cta-buttons > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .final-cta-gradient-card {
+    padding: 2.5rem 1.25rem;
+  }
+  .crm-white-card,
+  .bento-card {
+    padding: 1.5rem 1.25rem;
+  }
+}

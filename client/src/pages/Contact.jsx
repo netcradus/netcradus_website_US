@@ -421,9 +421,6 @@ export default function Contact() {
                     <span className="channel-label">CALL US</span>
                     <a href="tel:+13024952661" className="channel-val-primary">+1 302 495 2661</a>
                     <span className="channel-sub-info">24×7 Emergency Incident Response</span>
-                    <div className="toll-free-pill">
-                      <span>Toll-Free:</span> <a href="tel:1800121008800">1800 121 008800</a>
-                    </div>
                   </div>
                 </div>
 
@@ -721,9 +718,9 @@ export default function Contact() {
                 <span>Talk to an Expert</span>
                 <ArrowRight size={16} />
               </a>
-              <a href="tel:1800121008800" className="cta-secondary-btn">
+              <a href="tel:+13024952661" className="cta-secondary-btn">
                 <Phone size={16} className="btn-icon-orange" />
-                <span>Call Dispatch: 1800 121 008800</span>
+                <span>Call US Desk: +1 302 495 2661</span>
               </a>
             </div>
           </div>

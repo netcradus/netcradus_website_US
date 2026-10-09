@@ -404,7 +404,7 @@ export default function PrivacyPolicy() {
                         <div className="policy-icon-circle">
                           <IconComponent size={20} />
                         </div>
-                        <h2 className="policy-title">{sec.number}. {sec.title}</h2>
+                        <h2 className="policy-title">{sec.title}</h2>
                       </div>
                     </div>
                   </div>

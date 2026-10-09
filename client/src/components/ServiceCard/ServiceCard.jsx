@@ -36,11 +36,11 @@ export default function ServiceCard({ service }) {
         <div className={`service-icon-box ${service.accent || 'cyan'}`}>
           <IconComponent size={26} />
         </div>
-        <span className="service-tag-badge">{service.tag}</span>
+        <span className="service-tag-badge">{service.tag || service.badge || service.category}</span>
       </div>
 
       <h3 className="service-card-title">{service.title}</h3>
-      <p className="service-card-desc">{service.shortDescription}</p>
+      <p className="service-card-desc">{service.shortDescription || service.heroDescription}</p>
 
       {service.capabilities && (
         <ul className="service-capabilities-list">
@@ -54,10 +54,6 @@ export default function ServiceCard({ service }) {
       )}
 
       <div className="service-card-footer">
-        <div className="service-sla-badge">
-          <span className="sla-dot" />
-          <span>{service.sla}</span>
-        </div>
         <Link to={`/services/${service.id}`} className="service-learn-more">
           <span>Explore Capabilities</span>
           <ArrowRight size={15} className="arrow-icon" />

@@ -374,9 +374,9 @@ export default function ServiceDetail() {
                 <span>Request Security Assessment</span>
                 <ArrowRight size={18} />
               </Link>
-              <a href="tel:1800121008800" className="cta-secondary-btn">
+              <a href="tel:+13024952661" className="cta-secondary-btn">
                 <PhoneCall size={16} />
-                <span>Toll-Free: 1800 121 008800</span>
+                <span>Call US Desk: +1 302 495 2661</span>
               </a>
             </div>
           </div>
